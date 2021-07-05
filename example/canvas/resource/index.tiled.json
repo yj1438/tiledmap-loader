@@ -1,240 +1,94 @@
-{ "compressionlevel":-1,
- "height":1624,
- "infinite":false,
- "layers":[
+{
+  "compressionlevel": -1,
+  "width": 750,
+  "height": 1624,
+  "infinite": false,
+  "layers": [
+    {
+      "draworder": "index",
+      "id": 1,
+      "name": "layer1",
+      "objects": [],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "nextlayerid": 2,
+  "nextobjectid": 1,
+  "orientation": "orthogonal",
+  "renderorder": "left-up",
+  "tiledversion": "1.7.0",
+  "tileheight": 1,
+  "tilesets": [
+    {
+      "columns": 0,
+      "firstgid": 1,
+      "grid": {
+        "height": 1,
+        "orientation": "orthogonal",
+        "width": 1
+      },
+      "margin": 0,
+      "name": "index",
+      "spacing": 0,
+      "tilecount": 1,
+      "tilewidth": 750,
+      "tileheight": 1333,
+      "tiles": [
         {
-         "draworder":"index",
-         "id":1,
-         "name":"layer1",
-         "objects":[
-                {
-                 "gid":2,
-                 "height":1624,
-                 "id":1,
-                 "name":"bg",
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"FadeOut,1000"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":750,
-                 "x":0,
-                 "y":1623.11111111111
-                }, 
-                {
-                 "gid":4,
-                 "height":200,
-                 "id":2,
-                 "name":"energy3",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":120,
-                 "x":584.444444444444,
-                 "y":1166.66666666666
-                }, 
-                {
-                 "gid":4,
-                 "height":200,
-                 "id":3,
-                 "name":"energy2",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":120,
-                 "x":147.407407407407,
-                 "y":540.740740740741
-                }, 
-                {
-                 "gid":4,
-                 "height":200,
-                 "id":4,
-                 "name":"energy1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":120,
-                 "x":299.407407407407,
-                 "y":851.925925925926
-                }, 
-                {
-                 "gid":6,
-                 "height":249,
-                 "id":5,
-                 "name":"chicken1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":225,
-                 "x":225.037037037037,
-                 "y":1521.29629629629
-                }, 
-                {
-                 "gid":9,
-                 "height":108,
-                 "id":6,
-                 "name":"enrtyIcon",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":108,
-                 "x":0,
-                 "y":1331.77777777778
-                }, 
-                {
-                 "gid":10,
-                 "height":201,
-                 "id":7,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":252,
-                 "x":8,
-                 "y":1205
-                }, 
-                {
-                 "gid":10,
-                 "height":201,
-                 "id":8,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":252,
-                 "x":396,
-                 "y":901
-                }],
-         "opacity":1,
-         "properties":[
-                {
-                 "name":"action",
-                 "type":"string",
-                 "value":""
-                }],
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+          "id": 0,
+          "image": "index/bg.jpeg",
+          "imagewidth": 750,
+          "imageheight": 1333
+        }
+      ]
+    },
+    {
+      "columns": 0,
+      "firstgid": 2,
+      "grid": {
+        "height": 1,
+        "orientation": "orthogonal",
+        "width": 1
+      },
+      "margin": 0,
+      "name": "images",
+      "spacing": 0,
+      "tilecount": 4,
+      "tilewidth": 252,
+      "tileheight": 313,
+      "tiles": [
         {
-         "draworder":"topdown",
-         "id":2,
-         "name":"layer2",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }],
- "nextlayerid":3,
- "nextobjectid":9,
- "orientation":"orthogonal",
- "renderorder":"left-up",
- "tiledversion":"1.7.0",
- "tileheight":1,
- "tilesets":[
+          "id": 0,
+          "image": "images/1.jpeg",
+          "imagewidth": 250,
+          "imageheight": 250
+        },
         {
-         "columns":0,
-         "firstgid":1,
-         "grid":
-            {
-             "height":1,
-             "orientation":"orthogonal",
-             "width":1
-            },
-         "margin":0,
-         "name":"index",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":1624,
-         "tiles":[
-                {
-                 "id":0,
-                 "image":"index\/cbg.png",
-                 "imageheight":1624,
-                 "imagewidth":750
-                }],
-         "tilewidth":750
-        }, 
+          "id": 1,
+          "image": "images/2.jpeg",
+          "imagewidth": 250,
+          "imageheight": 313
+        },
         {
-         "columns":0,
-         "firstgid":2,
-         "grid":
-            {
-             "height":1,
-             "orientation":"orthogonal",
-             "width":1
-            },
-         "margin":0,
-         "name":"images",
-         "spacing":0,
-         "tilecount":9,
-         "tileheight":1624,
-         "tiles":[
-                {
-                 "id":0,
-                 "image":"images\/baba-bg.png",
-                 "imageheight":1624,
-                 "imagewidth":750
-                }, 
-                {
-                 "id":1,
-                 "image":"images\/box-award.png",
-                 "imageheight":316,
-                 "imagewidth":289
-                }, 
-                {
-                 "id":2,
-                 "image":"images\/bubble.png",
-                 "imageheight":200,
-                 "imagewidth":120
-                }, 
-                {
-                 "id":3,
-                 "image":"images\/bx.png",
-                 "imageheight":150,
-                 "imagewidth":154
-                }, 
-                {
-                 "id":4,
-                 "image":"images\/ch.png",
-                 "imageheight":249,
-                 "imagewidth":225
-                }, 
-                {
-                 "id":5,
-                 "image":"images\/chi.png",
-                 "imageheight":131,
-                 "imagewidth":117
-                }, 
-                {
-                 "id":6,
-                 "image":"images\/chi1.png",
-                 "imageheight":130,
-                 "imagewidth":119
-                }, 
-                {
-                 "id":7,
-                 "image":"images\/icon.png",
-                 "imageheight":108,
-                 "imagewidth":108
-                }, 
-                {
-                 "id":8,
-                 "image":"images\/panda.png",
-                 "imageheight":201,
-                 "imagewidth":252
-                }],
-         "tilewidth":750
-        }],
- "tilewidth":1,
- "type":"map",
- "version":"1.6",
- "width":750
+          "id": 2,
+          "image": "images/3.jpeg",
+          "imagewidth": 250,
+          "imageheight": 236
+        },
+        {
+          "id": 3,
+          "image": "images/panda.png",
+          "imagewidth": 252,
+          "imageheight": 201
+        }
+      ]
+    }
+  ],
+  "tilewidth": 1,
+  "type": "map",
+  "version": "1.6"
 }

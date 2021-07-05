@@ -1,59 +1,20 @@
 {
-    "activeFile": "index.tiled.json",
-    "expandedProjectPaths": [
-        "."
-    ],
     "fileStates": {
-        "index.json": {
-            "scale": 0.2151,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 430.0325430032543,
-                "y": 922.8265922826592
-            }
-        },
-        "index.json#images": {
-            "dynamicWrapping": false,
-            "scaleInDock": 0.0986
-        },
-        "index.json#index": {
-            "dynamicWrapping": true,
-            "scaleInDock": 0.1473
-        },
         "index.tiled.json": {
-            "scale": 0.5,
+            "scale": 0.558,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 135,
-                "y": 1305
+                "x": 386.2007168458781,
+                "y": 1205.1971326164871
             }
         },
         "index.tiled.json#images": {
-            "dynamicWrapping": true,
-            "scaleInDock": 0.08
+            "scaleInDock": 0.3736
         },
         "index.tiled.json#index": {
-            "dynamicWrapping": true,
-            "scaleInDock": 0.0637
-        },
-        "text.json": {
-            "scale": 0.09,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 2261.1111111111113,
-                "y": 2694.444444444444
-            }
-        },
-        "ttt.json": {
-            "dynamicWrapping": true,
-            "scaleInDock": 1.002,
-            "scaleInEditor": 1
+            "scaleInDock": 1
         }
     },
-    "openFiles": [
-        "index.tiled.json"
-    ],
-    "project": "index.tiled-project",
     "recentFiles": [
         "index.tiled.json"
     ]
