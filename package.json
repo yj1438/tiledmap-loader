@@ -1,0 +1,53 @@
+{
+  "name": "tiledmap-loader",
+  "version": "0.0.1",
+  "description": "For projects such as pixijs etx. , access to the visual editing capabilities of the tiled map tool.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src -d dist --copy-files",
+    "build:util": "cross-env NODE_ENV=production babel example/util -d util --config-file ./babel.util.config.js --copy-files",
+    "ci": "echo true"
+  },
+  "keywords": [
+    "webpack",
+    "pixijs",
+    "tiled"
+  ],
+  "files": [
+    "dist",
+    "util"
+  ],
+  "engines": {
+    "node": ">= 10.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yj1438/tiledmap-loader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yj1438/tiledmap-loader/issues"
+  },
+  "homepage": "https://github.com/yj1438/tiledmap-loader#readme",
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "glob": "^7.1.7",
+    "loader-utils": "^2.0.0",
+    "sort-keys": "^4.2.0",
+    "yaml-js": "^0.2.3"
+  },
+  "peerDependencies": {
+    "webpack": "^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-decorators": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.3"
+  }
+}
