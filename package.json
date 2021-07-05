@@ -1,11 +1,13 @@
 {
   "name": "tiledmap-loader",
+  "author": "yinjie",
   "version": "0.0.1",
   "description": "For projects such as pixijs etx. , access to the visual editing capabilities of the tiled map tool.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src -d dist --copy-files",
+    "build:loader": "cross-env NODE_ENV=production babel src -d dist --copy-files",
     "build:util": "cross-env NODE_ENV=production babel example/util -d util --config-file ./babel.util.config.js --copy-files",
+    "build": "npm run build:util && npm run build:loader",
     "ci": "echo true"
   },
   "keywords": [
@@ -24,7 +26,6 @@
     "type": "git",
     "url": "git+https://github.com/yj1438/tiledmap-loader.git"
   },
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yj1438/tiledmap-loader/issues"
