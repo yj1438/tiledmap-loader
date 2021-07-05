@@ -51,6 +51,8 @@ module.exports = function(content, map, meta) {
   } else {
     mainJson = JSON.parse(JSON.stringify(template.main));
     const layerJson = JSON.parse(JSON.stringify(template.layer));
+    mainJson.width = config.width;
+    mainJson.height = config.height;
     mainJson.layers.push(layerJson);
     mainJson.nextlayerid = layerJson.id + 1;
     mainJson.tilesets = tilesetsInfo;
