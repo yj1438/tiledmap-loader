@@ -1,7 +1,7 @@
 {
   "name": "tiledmap-loader",
   "author": "yinjie",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "For projects such as pixijs etx. , access to the visual editing capabilities of the tiled map tool.",
   "main": "dist/index.js",
   "scripts": {
