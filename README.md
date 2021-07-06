@@ -78,10 +78,10 @@ webpack 中的配置使用 loader，注意：这里涉及到资源，会依赖 u
   - <index>.tiled.resource.js // 资源文件，不要手动修改
 ```
 
-在 Tiled 工具中打开 `<index>.tiled-project` 项目文件。
+在 Tiled 工具（只支持 >= 1.6 版本）中打开 `<index>.tiled-project` 项目文件。
 前置工作就准备完成，可以进行可视化编辑了。
 
-![https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*P-J5RYbm1U4AAAAAAAAAAAAAARQnAQ](https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*P-J5RYbm1U4AAAAAAAAAAAAAARQnAQ)
+![image1](https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*sisQS5eoFD0AAAAAAAAAAAAAARQnAQ)
 
 ### 1.3 使用
 
