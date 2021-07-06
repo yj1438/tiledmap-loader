@@ -1,4 +1,4 @@
-import { getTileGidMap } from './common';
+import { getTileGidMap, calcPosAndRotation } from './common';
 
 /**
  * 
@@ -17,10 +17,18 @@ function layout(tinyObj, info = {}) {
     width = 0,
   } = info;
   tinyObj.name = name;
-  tinyObj.setPosition(x, y - height); // 这里需要注意下，tiled 的元素锚点在左下
   tinyObj.setVisible(visible);
   tinyObj.setOpacity(opacity);
-  tinyObj.setRotation(Tiny.deg2radian(rotation));
+  if (tinyObj.constructor === Tiny.Sprite) {
+    const posAndRotation = calcPosAndRotation(info, true);
+    tinyObj.width = width;
+    tinyObj.height = height;
+    tinyObj.setAnchor(0.5, 0.5);
+    tinyObj.setPosition(posAndRotation.x, posAndRotation.y); // 这里需要注意下，tiled 的元素锚点在左下
+    tinyObj.setRotation(posAndRotation.rotation / 180 * Math.PI)
+  } else {
+    tinyObj.setPosition(x, y - height); // 这里需要注意下，tiled 的元素锚点在左下
+  }
 }
 
 export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends Tiny.Container {
@@ -30,7 +38,7 @@ export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends T
     this.tiledJsonData = tiledJsonData;
     this.resource = resource;
     this.gidMap = getTileGidMap(tiledJsonData);
-    this._render();
+    this.renderContent();
     //
   }
   
@@ -38,7 +46,7 @@ export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends T
    * 按 tiled 信息渲染
    * @private
    */
-  _render() {
+  renderContent() {
     const layers = this.tiledJsonData.layers;
     (layers || []).forEach(layer => {
       const container = new Tiny.Container();

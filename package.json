@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build:loader": "cross-env NODE_ENV=production babel src -d dist --copy-files",
-    "build:util": "cross-env NODE_ENV=production babel example/util -d util --config-file ./babel.util.config.js --copy-files",
+    "build:util": "cross-env NODE_ENV=production babel example/tiledClass -d util --config-file ./babel.util.config.js --copy-files",
     "build": "npm run build:util && npm run build:loader",
     "ci": "echo true"
   },

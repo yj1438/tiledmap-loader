@@ -1,4 +1,4 @@
-import TiledLayersContianer from '../util/TiledLayersContianer';
+import TiledLayersContianer from '../tiledClass/TiledLayersContianer.tinyjs';
 import tiledData from './resource/index.tiled';
 
 console.warn(tiledData);

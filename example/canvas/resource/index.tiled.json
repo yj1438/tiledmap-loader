@@ -1,94 +1,138 @@
-{
-  "compressionlevel": -1,
-  "width": 750,
-  "height": 1624,
-  "infinite": false,
-  "layers": [
-    {
-      "draworder": "index",
-      "id": 1,
-      "name": "layer1",
-      "objects": [],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    }
-  ],
-  "nextlayerid": 2,
-  "nextobjectid": 1,
-  "orientation": "orthogonal",
-  "renderorder": "left-up",
-  "tiledversion": "1.7.0",
-  "tileheight": 1,
-  "tilesets": [
-    {
-      "columns": 0,
-      "firstgid": 1,
-      "grid": {
-        "height": 1,
-        "orientation": "orthogonal",
-        "width": 1
-      },
-      "margin": 0,
-      "name": "index",
-      "spacing": 0,
-      "tilecount": 1,
-      "tilewidth": 750,
-      "tileheight": 1333,
-      "tiles": [
+{ "compressionlevel":-1,
+ "height":1624,
+ "infinite":false,
+ "layers":[
         {
-          "id": 0,
-          "image": "index/bg.jpeg",
-          "imagewidth": 750,
-          "imageheight": 1333
-        }
-      ]
-    },
-    {
-      "columns": 0,
-      "firstgid": 2,
-      "grid": {
-        "height": 1,
-        "orientation": "orthogonal",
-        "width": 1
-      },
-      "margin": 0,
-      "name": "images",
-      "spacing": 0,
-      "tilecount": 4,
-      "tilewidth": 252,
-      "tileheight": 313,
-      "tiles": [
+         "draworder":"index",
+         "id":1,
+         "name":"layer1",
+         "objects":[
+                {
+                 "gid":4,
+                 "height":1333,
+                 "id":4,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":750,
+                 "x":0,
+                 "y":1334
+                }, 
+                {
+                 "gid":2,
+                 "height":212.84,
+                 "id":5,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"action",
+                         "type":"string",
+                         "value":"FadeOut, 1000"
+                        }],
+                 "rotation":55.3891729744705,
+                 "type":"",
+                 "visible":true,
+                 "width":170,
+                 "x":47.3189180228142,
+                 "y":551.569008451325
+                }, 
+                {
+                 "gid":3,
+                 "height":236,
+                 "id":6,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":250,
+                 "x":344.901235229624,
+                 "y":996.918315976533
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
         {
-          "id": 0,
-          "image": "images/1.jpeg",
-          "imagewidth": 250,
-          "imageheight": 250
-        },
+         "draworder":"topdown",
+         "id":4,
+         "name":"layer2",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":5,
+ "nextobjectid":9,
+ "orientation":"orthogonal",
+ "renderorder":"left-up",
+ "tiledversion":"1.7.0",
+ "tileheight":1,
+ "tilesets":[
         {
-          "id": 1,
-          "image": "images/2.jpeg",
-          "imagewidth": 250,
-          "imageheight": 313
-        },
+         "columns":0,
+         "firstgid":1,
+         "grid":
+            {
+             "height":1,
+             "orientation":"orthogonal",
+             "width":1
+            },
+         "margin":0,
+         "name":"images1",
+         "spacing":0,
+         "tilecount":3,
+         "tileheight":313,
+         "tiles":[
+                {
+                 "id":0,
+                 "image":"images1\/1.jpeg",
+                 "imageheight":250,
+                 "imagewidth":250
+                }, 
+                {
+                 "id":1,
+                 "image":"images1\/2.jpeg",
+                 "imageheight":313,
+                 "imagewidth":250
+                }, 
+                {
+                 "id":2,
+                 "image":"images1\/3.jpeg",
+                 "imageheight":236,
+                 "imagewidth":250
+                }],
+         "tilewidth":250
+        }, 
         {
-          "id": 2,
-          "image": "images/3.jpeg",
-          "imagewidth": 250,
-          "imageheight": 236
-        },
-        {
-          "id": 3,
-          "image": "images/panda.png",
-          "imagewidth": 252,
-          "imageheight": 201
-        }
-      ]
-    }
-  ],
-  "tilewidth": 1,
-  "type": "map",
-  "version": "1.6"
+         "columns":0,
+         "firstgid":4,
+         "grid":
+            {
+             "height":1,
+             "orientation":"orthogonal",
+             "width":1
+            },
+         "margin":0,
+         "name":"images2",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":1333,
+         "tiles":[
+                {
+                 "id":0,
+                 "image":"images2\/bg.jpeg",
+                 "imageheight":1333,
+                 "imagewidth":750
+                }],
+         "tilewidth":750
+        }],
+ "tilewidth":1,
+ "type":"map",
+ "version":"1.6",
+ "width":750
 }
