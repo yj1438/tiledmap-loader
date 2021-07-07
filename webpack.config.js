@@ -46,8 +46,8 @@ const config = {
   },
   output: {
     path: path.resolve('./util/'),
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
+    filename: '[name].umd.js',
+    chunkFilename: '[name].chunk.umd.js',
     libraryTarget: 'umd',
   },
   module: {

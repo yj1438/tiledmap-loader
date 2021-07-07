@@ -130,8 +130,7 @@ const config = {
         use: [
           {
             loader: '../src/index.js',
-            options: {
-          },
+            options: {},
           },
         ],
       },
