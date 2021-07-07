@@ -6,8 +6,8 @@
   "author": "yj138290",
   "license": "ISC",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server",
-    "build": "rm -rf www && webpack && cp -r redirect/* www/",
+    "dev": "webpack-dev-server",
+    "build": "rm -rf www && webpack --mode=production",
     "build:analyzer": "rm -rf www && webpack --analyzer"
   },
   "browserslist": [
@@ -24,6 +24,7 @@
     "@babel/plugin-proposal-decorators": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "@babel/runtime-corejs3": "^7.14.7",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",
@@ -45,7 +46,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "core-js": "^3.15.2",
     "object-path": "^0.11.5"
   }
 }

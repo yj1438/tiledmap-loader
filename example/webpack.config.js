@@ -42,7 +42,6 @@ const jsLoader = [
           },
         ],
         ['@babel/plugin-transform-modules-commonjs', { 'loose': true }],
-        ['@babel/plugin-proposal-decorators', { 'legacy': true }],
         ['@babel/plugin-proposal-class-properties', { 'loose': true }],
         ['@babel/plugin-proposal-private-methods', { 'loose': true }],
       ],
@@ -157,13 +156,11 @@ const config = {
   ],
   externals: {
     'Tiny': 'Tiny',
+    'PIXI': 'PIXI',
   },
   resolve: {
     alias: {
       common: path.join(__dirname, './common'),
-      img: path.join(__dirname, './common/img'),
-      Util: path.join(__dirname, './Util'),
-      Service: path.join(__dirname, '.r/Service'),
     },
   },
   optimization: {
