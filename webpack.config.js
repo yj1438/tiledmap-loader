@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const isDev = process.env.NODE_ENV === 'development';
 console.log('ENV development: ' + isDev);
@@ -77,11 +77,11 @@ const config = {
 };
 
 // 生成分析报表
-const analyzer = require('yargs').argv.analyzer;
-if (analyzer) {
-  config.plugins.push(new BundleAnalyzerPlugin({
-    analyzerMode: 'static',
-  }));
-}
+// const analyzer = require('yargs').argv.analyzer;
+// if (analyzer) {
+//   config.plugins.push(new BundleAnalyzerPlugin({
+//     analyzerMode: 'static',
+//   }));
+// }
 
 module.exports = config;

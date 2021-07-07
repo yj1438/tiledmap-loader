@@ -3,7 +3,7 @@
  * @param {Object} tiledJsonData tiled 生成的产物
  * @returns 
  */
-exports.getTileGidMap = function(tiledJsonData) {
+export function getTileGidMap(tiledJsonData) {
   const oldGidMap = {};
   tiledJsonData.tilesets.forEach(tileset => {
     const firstgid = tileset.firstgid;
@@ -26,7 +26,7 @@ function trigonometric(a, b) {
  * 2. tiled 在旋转的同时，会根据原图片左下点的实际绝对坐标，调整 x/y 坐标值，非常反人类，需要进行计算修正
  * > https://discourse.mapeditor.org/t/why-does-rotation-change-x-y/4086
  */
-exports.calcPosAndRotation = function(info, canRotate = false) {
+export function calcPosAndRotation(info, canRotate = false) {
   const {
     x = 0,
     y = 0,
