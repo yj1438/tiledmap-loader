@@ -18,57 +18,6 @@ module.exports = __webpack_require__("JLQQ");
 
 /***/ }),
 
-/***/ "CeEi":
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__("0zm+");
-
-/***/ }),
-
-/***/ "CxHw":
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__("L3Tz");
-
-/***/ }),
-
-/***/ "lacq":
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ _inheritsLoose)
-});
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs3/core-js/object/create.js
-var create = __webpack_require__("CeEi");
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs3/core-js/object/set-prototype-of.js
-var set_prototype_of = __webpack_require__("CxHw");
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs3/helpers/esm/setPrototypeOf.js
-
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = set_prototype_of || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs3/helpers/esm/inheritsLoose.js
-
-
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  _setPrototypeOf(subClass, superClass);
-}
-
-/***/ }),
-
 /***/ "G9WS":
 /***/ ((module) => {
 
@@ -246,52 +195,6 @@ __webpack_require__("qLPT");
 var entryVirtual = __webpack_require__("oWnS");
 
 module.exports = entryVirtual('Array').forEach;
-
-
-/***/ }),
-
-/***/ "9EaA":
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-__webpack_require__("2SXh");
-var path = __webpack_require__("dktu");
-
-var Object = path.Object;
-
-module.exports = function create(P, D) {
-  return Object.create(P, D);
-};
-
-
-/***/ }),
-
-/***/ "aOzW":
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-__webpack_require__("VsXB");
-var path = __webpack_require__("dktu");
-
-module.exports = path.Object.setPrototypeOf;
-
-
-/***/ }),
-
-/***/ "0zm+":
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var parent = __webpack_require__("9EaA");
-
-module.exports = parent;
-
-
-/***/ }),
-
-/***/ "L3Tz":
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var parent = __webpack_require__("aOzW");
-
-module.exports = parent;
 
 
 /***/ }),
@@ -2061,37 +1964,6 @@ addToUnscopables('entries');
 
 /***/ }),
 
-/***/ "2SXh":
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-var $ = __webpack_require__("pevS");
-var DESCRIPTORS = __webpack_require__("wbIY");
-var create = __webpack_require__("SJYm");
-
-// `Object.create` method
-// https://tc39.es/ecma262/#sec-object.create
-$({ target: 'Object', stat: true, sham: !DESCRIPTORS }, {
-  create: create
-});
-
-
-/***/ }),
-
-/***/ "VsXB":
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-var $ = __webpack_require__("pevS");
-var setPrototypeOf = __webpack_require__("7GIe");
-
-// `Object.setPrototypeOf` method
-// https://tc39.es/ecma262/#sec-object.setprototypeof
-$({ target: 'Object', stat: true }, {
-  setPrototypeOf: setPrototypeOf
-});
-
-
-/***/ }),
-
 /***/ "UUWy":
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -2177,18 +2049,6 @@ module.exports = function (it) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -2201,22 +2061,6 @@ module.exports = function (it) {
 /******/ 		})();
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -2225,162 +2069,28 @@ var __webpack_exports__ = {};
 var exports = __webpack_exports__;
 
 
-var _interopRequireDefault = __webpack_require__("G9WS");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _forEach = _interopRequireDefault(__webpack_require__("RXMP"));
-
-var _inheritsLoose2 = _interopRequireDefault(__webpack_require__("lacq"));
-
 var _common = __webpack_require__("Vuz2");
 
-/**
- * 布局等基础属性设置
- * @param {} tinyObj 
- * @param {} info
- */
-function layout(obj, info) {
-  if (info === void 0) {
-    info = {};
+var TiledData = /*#__PURE__*/function () {
+  function TiledData(tiledJson) {
+    this._tiledJson = tiledJson;
+    this.tiledGidMap = (0, _common.getTileGidMap)(tiledJson);
+    this.itemMapByName = (0, _common.getNamedObjectMap)(tiledJson);
   }
 
-  var _info = info,
-      _info$x = _info.x,
-      x = _info$x === void 0 ? 0 : _info$x,
-      _info$y = _info.y,
-      y = _info$y === void 0 ? 0 : _info$y,
-      _info$name = _info.name,
-      name = _info$name === void 0 ? '' : _info$name,
-      _info$opacity = _info.opacity,
-      opacity = _info$opacity === void 0 ? 1 : _info$opacity,
-      _info$visible = _info.visible,
-      visible = _info$visible === void 0 ? true : _info$visible,
-      _info$rotation = _info.rotation,
-      rotation = _info$rotation === void 0 ? 0 : _info$rotation,
-      _info$height = _info.height,
-      height = _info$height === void 0 ? 0 : _info$height,
-      _info$width = _info.width,
-      width = _info$width === void 0 ? 0 : _info$width;
-  obj.name = name;
-  obj.visible = visible;
-  obj.alpha = opacity;
+  var _proto = TiledData.prototype;
 
-  if (obj.constructor === PIXI.Sprite) {
-    var posAndRotation = (0, _common.calcPosAndRotation)(info, true);
-    obj.width = width;
-    obj.height = height;
-    obj.anchor.set(0.5, 0.5);
-    obj.position.set(posAndRotation.x, posAndRotation.y); // 这里需要注意下，tiled 的元素锚点在左下
-
-    obj.angle = posAndRotation.rotation;
-  } else {
-    obj.position.set(x, y - height); // 这里需要注意下，tiled 的元素锚点在左下
-  }
-}
-
-var _default = PIXI.TiledLayersContianer = /*#__PURE__*/function (_PIXI$Container) {
-  (0, _inheritsLoose2["default"])(TiledLayersContianer, _PIXI$Container);
-
-  function TiledLayersContianer(tiledJsonData, resource) {
-    var _this;
-
-    _this = _PIXI$Container.call(this) || this;
-    _this.childrenMap = {};
-    _this.tiledJsonData = tiledJsonData;
-    _this.resource = resource;
-    _this.gidMap = (0, _common.getTileGidMap)(tiledJsonData);
-
-    _this.renderContent(); //
-
-
-    return _this;
-  }
-  /**
-   * 按 tiled 信息渲染
-   * @private
-   */
-
-
-  var _proto = TiledLayersContianer.prototype;
-
-  _proto.renderContent = function renderContent() {
-    var _context,
-        _this2 = this;
-
-    var layers = this.tiledJsonData.layers;
-    (0, _forEach["default"])(_context = layers || []).call(_context, function (layer) {
-      var container = new PIXI.Container();
-      layout(container, layer);
-
-      _this2.addChild(container);
-
-      _this2._setChildrenMap(container); //
-
-
-      var objects = layer.objects || [];
-      (0, _forEach["default"])(objects).call(objects, function (obj) {
-        var gid = obj.gid;
-        var tileInfo = _this2.gidMap[gid];
-
-        if (tileInfo) {
-          // 先尝试从缓存中取
-          var imageName = tileInfo.image;
-          var imageUrl = _this2.resource[imageName];
-          var texture = PIXI.utils.TextureCache[imageUrl];
-
-          if (!texture) {
-            texture = PIXI.Texture.fromImage(imageUrl);
-          }
-
-          var sprite = new PIXI.Sprite(texture);
-          layout(sprite, obj);
-          container.addChild(sprite);
-
-          _this2._setChildrenMap(sprite);
-        }
-      });
-    });
-  }
-  /**
-   * 根据 name 获取指定元素列表
-   * @returns {Array<Object>}
-   */
-  ;
-
-  _proto.getChildrenByName = function getChildrenByName(name) {
-    return this.childrenMap[name] || [];
-  }
-  /**
-   * 根据 name 获取指定一个元素
-   * @returns {Object}
-   */
-  ;
-
-  _proto.getChildByName = function getChildByName(name) {
-    return this.getChildrenByName(name)[0];
-  }
-  /**
-   * @private
-   * @param {Object} tinyObj 
-   */
-  ;
-
-  _proto._setChildrenMap = function _setChildrenMap(tinyObj) {
-    var name = tinyObj.name;
-
-    if (name) {
-      var children = this.childrenMap[name] || [];
-      children.push(tinyObj);
-      this.childrenMap[name] = children;
-    }
+  _proto.getObjectByName = function getObjectByName(name) {
+    return this.itemMapByName[name];
   };
 
-  return TiledLayersContianer;
-}(PIXI.Container);
+  return TiledData;
+}();
 
-exports.default = _default;
+exports.default = TiledData;
 })();
 
 /******/ 	return __webpack_exports__;

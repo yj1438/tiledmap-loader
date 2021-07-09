@@ -4,14 +4,44 @@
  * @returns 
  */
 export function getTileGidMap(tiledJsonData) {
-  const oldGidMap = {};
-  tiledJsonData.tilesets.forEach(tileset => {
+  const gidMap = {};
+  tiledJsonData.tilesets.forEach((tileset, index) => {
     const firstgid = tileset.firstgid;
-    tileset.tiles.forEach((tile, index) => {
-      oldGidMap[firstgid + index] = tile;
+    tileset.tiles.forEach((tile, _index) => {
+      tile.tilesetsIndex = index;
+      const gid = firstgid + _index;
+      tile.gid = gid;
+      gidMap[gid] = tile;
     });
   });
-  return oldGidMap;
+  return gidMap;
+}
+
+/**
+ * 获取内容 map，key 为 name
+ * @param {Object} tiledJsonData 
+ * @returns
+ */
+export function getNamedObjectMap(tiledJsonData) {
+  const objectMap = {};
+  debugger;
+  tiledJsonData.layers.forEach(layer => {
+    const name = layer.name;
+    if (name) {
+      layer.type = 'layer';
+      objectMap[name] = objectMap[name] || [];
+      objectMap[name].push(layer);
+    }
+    layer.objects.forEach(obj => {
+      const _name = obj.name;
+      if (_name) {
+        obj.type = 'object';
+        objectMap[_name] = objectMap[_name] || [];
+        objectMap[_name].push(obj);
+      }
+    });
+  });
+  return objectMap;
 }
 
 /**

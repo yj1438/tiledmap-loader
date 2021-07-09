@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -41,6 +43,7 @@ const jsLoader = [
 
 const config = {
   entry: {
+    'TiledJsonData': './example/tiledClass/TiledJsonData.js',
     'TiledLayersContianer.pixi': './example/tiledClass/TiledLayersContianer.pixi.js',
     'TiledLayersContianer.tinyjs': './example/tiledClass/TiledLayersContianer.tinyjs.js',
   },
@@ -64,6 +67,11 @@ const config = {
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new webpack.DefinePlugin({
       ENV: '"production"',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'example/tiledClass' },
+      ],
     }),
   ],
   externals: {

@@ -68,7 +68,7 @@ webpack 中的配置使用 loader，注意：这里涉及到资源，会依赖 u
 }
 ```
 
-配置好后，在首次构建后，会在 `<index>.tiled` 同级产生以下几个新文件，（新文件名同 loader 入口的 <index> 文件名）
+配置好，在首次构建后，会在 `<index>.tiled` 同级产生以下几个新文件，（新文件名同 loader 入口的 <index> 文件名）
 
 ```
 - resource
@@ -78,17 +78,19 @@ webpack 中的配置使用 loader，注意：这里涉及到资源，会依赖 u
   - <index>.tiled.resource.js // 资源文件，不要手动修改
 ```
 
-在 Tiled 工具（只支持 >= 1.6 版本）中打开 `<index>.tiled-project` 项目文件。
-前置工作就准备完成，可以进行可视化编辑了。
+下载安装 [Tiled](https://www.mapeditor.org/)。
+
+在 [Tiled](https://www.mapeditor.org/) 工具（只支持 >= 1.6 版本）中打开 `<index>.tiled-project` 项目文件。
+前置工作就准备完成，即可以进行可视化编辑。
 
 ![image1](https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*sisQS5eoFD0AAAAAAAAAAAAAARQnAQ)
 
 ### 1.3 使用
 
-> 在 Tiled 的编辑结果会同步在 `<index>.tiled.json` 文件。  
-> 所用到的资源，也会生成 `<index>.tiled.resource.js` 文件。
+> 在 Tiled 的编辑结果会同步在 `<index>.tiled.json`。  
+> 所用到的资源会自动生成 `<index>.tiled.resource.js`。
 
-编辑结果和资源使用都会在引用文件 `render.js` 中返回，如：
+以上编辑结果和资源引用都会在引用文件中返回，如：
 
 ```js
 import tiledData from './resource/index.tiled';
@@ -109,16 +111,10 @@ console.warn(tiledData);
 以上项目 `render.js` eg:
 
 ```js
-// render.js
 import TiledLayersContianer from 'tiledmap-loader/util/TiledLayersContianer.pixi';
 import tiledData from './resource/index.tiled';
 
 console.warn(tiledData);
-
-const options = {
-  width: 750,
-  height: 1334,
-};
 
 export default {
   app: null,
@@ -131,17 +127,13 @@ export default {
       view,
       width: 750,
       height: 1624,
-      antialias: true,
-      backgroundColor: 0x98d8ff
     });
     this.root = this.app.stage;
-    //
-    this._render();
-  },
-  _render() {
+  
+    // eg: TiledContainer
     const container = new TiledLayersContianer(tiledData.tiledJson, tiledData.resource);
     this.root.addChild(container);
-    // eg 获取一个 PIXI 元素
+    // 获取一个 PIXI 元素
     const items = container.getChildByName('layer1');
     console.log(items)
   },
@@ -152,23 +144,50 @@ export default {
 
 同上，使用 `import TiledLayersContianer from 'tiledmap-loader/util/TiledLayersContianer.tinyjs';`
 
-## 2. 使用场景 and 最佳实践
+#### 只使用 tiledJson 数据
 
-### 2.1 适用的场景
+```js
+import TiledJsonData from 'tiledmap-loader/util/TiledJsonData';
+import tiledData from './resource/index.tiled';
 
-* 建议按实际项目的视觉层级和逻辑情况，拆分成多个 `.tiled` 文件夹，分层、分区域编辑。
-* 灵活使用 tiled 编辑时提供的“自定义属性”能力，和业务逻辑相结合。
+console.warn(tiledData);
 
-## 3. API
+export default {
+  init() {
+    // eg: TiledJsonData
+    const tiledJsonData = new TiledJsonData(tiledData.tiledJson);
+    console.log(tiledJsonData);
+    // 获取一个元素的基础信息
+    const objs = tiledJsonData.getObjectByName('obj1');
+    console.log(objs); // { x, y, height, width, rotation, properties, visible }
+  },
+};
+```
 
-### 3.1 method
+## 2. API
+
+### 2.1 method
 
 **TiledLayersContianer**
+
 
 * `getChildByName(name): <PIXI.Container|PIXI.Sprite>` 根据 name 获取元素，name 重复的话返回第一个
 * `getChildrenByName(name): Array<PIXI.Container|PIXI.Sprite>` 根据 name 获取元素列表
 
+
 **TiledSprite**
+
 
 * `getProperties(): Array<Object>` 获取 tiled 里加的自定义属性
 * `doAction(actionName)` 执行自定义属性里的 action
+
+## Example
+
+`example`
+
+## 4. 使用场景 and 最佳实践
+
+### 4.1 适用的场景
+
+* 建议按实际项目的视觉层级和逻辑情况，拆分成多个 `.tiled` 文件夹，分层、分区域编辑。
+* 灵活使用 tiled 编辑时提供的“自定义属性”能力，和业务逻辑相结合。

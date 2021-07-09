@@ -1,7 +1,7 @@
 import { getTileGidMap, calcPosAndRotation } from './common';
 
 /**
- * 
+ * 布局等基础属性设置
  * @param {} tinyObj 
  * @param {} info
  */

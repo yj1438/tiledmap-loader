@@ -11,7 +11,7 @@
                  "gid":4,
                  "height":1333,
                  "id":4,
-                 "name":"",
+                 "name":"bg",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -23,7 +23,7 @@
                  "gid":2,
                  "height":212.84,
                  "id":5,
-                 "name":"",
+                 "name":"obj1",
                  "properties":[
                         {
                          "name":"action",
@@ -41,7 +41,7 @@
                  "gid":3,
                  "height":236,
                  "id":6,
-                 "name":"",
+                 "name":"obj2",
                  "rotation":0,
                  "type":"",
                  "visible":true,

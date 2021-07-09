@@ -6,13 +6,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const autoprefixer = require('autoprefixer');
 
 const isDev = process.env.NODE_ENV === 'development';
 console.log('开发环境：' + isDev);
-// 生成分析报表
-const analyzer = require('yargs').argv.analyzer;
 
 const postcssCfg = {
   loader: 'postcss-loader',
@@ -30,7 +27,7 @@ const jsLoader = [
   {
     loader: 'babel-loader',
     options: {
-      presets: [['@babel/preset-env', { 'useBuiltIns': 'usage', 'corejs': '3', loose: true }]],
+      presets: [['@babel/preset-env', { 'useBuiltIns': 'usage', 'corejs': '3', 'loose': true }]],
       plugins: [
         [
           '@babel/plugin-transform-runtime',
@@ -66,19 +63,6 @@ const config = {
         use: jsLoader,
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: isDev,
-            },
-          },
-          'css-loader',
-          postcssCfg,
-        ],
-      },
-      {
         test: /\.less$/,
         use: [
           {
@@ -90,22 +74,6 @@ const config = {
           'css-loader',
           postcssCfg,
           'less-loader',
-        ],
-      },
-      {
-        test: /\.(png|jpg|jpeg|webp|gif|bmp)$/,
-        exclude: /resource/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 900,
-              name: '[name]_[hash:6].[ext]',
-              outputPath: 'css',
-              publicPath: './',
-              esModule: false,
-            },
-          },
         ],
       },
       {
@@ -199,12 +167,6 @@ if (isDev) {
   config.mode = 'production';
   config.plugins.push(new webpack.DefinePlugin({
     ENV: '"production"',
-  }));
-}
-
-if (analyzer) {
-  config.plugins.push(new BundleAnalyzerPlugin({
-    analyzerMode: 'static',
   }));
 }
 

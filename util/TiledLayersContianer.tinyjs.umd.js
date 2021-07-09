@@ -93,6 +93,7 @@ var _interopRequireDefault = __webpack_require__("G9WS");
 
 exports.__esModule = true;
 exports.getTileGidMap = getTileGidMap;
+exports.getNamedObjectMap = getNamedObjectMap;
 exports.calcPosAndRotation = calcPosAndRotation;
 
 var _forEach = _interopRequireDefault(__webpack_require__("RXMP"));
@@ -105,16 +106,55 @@ var _forEach = _interopRequireDefault(__webpack_require__("RXMP"));
 function getTileGidMap(tiledJsonData) {
   var _context;
 
-  var oldGidMap = {};
-  (0, _forEach["default"])(_context = tiledJsonData.tilesets).call(_context, function (tileset) {
+  var gidMap = {};
+  (0, _forEach["default"])(_context = tiledJsonData.tilesets).call(_context, function (tileset, index) {
     var _context2;
 
     var firstgid = tileset.firstgid;
-    (0, _forEach["default"])(_context2 = tileset.tiles).call(_context2, function (tile, index) {
-      oldGidMap[firstgid + index] = tile;
+    (0, _forEach["default"])(_context2 = tileset.tiles).call(_context2, function (tile, _index) {
+      tile.tilesetsIndex = index;
+      var gid = firstgid + _index;
+      tile.gid = gid;
+      gidMap[gid] = tile;
     });
   });
-  return oldGidMap;
+  return gidMap;
+}
+/**
+ * 获取内容 map，key 为 name
+ * @param {Object} tiledJsonData 
+ * @returns
+ */
+
+
+function getNamedObjectMap(tiledJsonData) {
+  var _context3;
+
+  var objectMap = {};
+  debugger;
+  (0, _forEach["default"])(_context3 = tiledJsonData.layers).call(_context3, function (layer) {
+    var _context4;
+
+    var name = layer.name;
+
+    if (name) {
+      layer.type = 'layer';
+      objectMap[name] = objectMap[name] || [];
+      objectMap[name].push(layer);
+    }
+
+    (0, _forEach["default"])(_context4 = layer.objects).call(_context4, function (obj) {
+      var _name = obj.name;
+
+      if (_name) {
+        obj.type = 'object';
+        objectMap[_name] = objectMap[_name] || [];
+
+        objectMap[_name].push(obj);
+      }
+    });
+  });
+  return objectMap;
 }
 /**
  * 三角形长边

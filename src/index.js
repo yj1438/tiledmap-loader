@@ -79,6 +79,7 @@ module.exports = function(content, map, meta) {
     common.output('增加 tiled project 文件：' + projectFilePath);
     fse.writeJSONSync(projectFilePath, template.tiledProject, { spaces: '  ' });
   }
+  //
   const esModule =
     typeof options.esModule !== 'undefined' ? options.esModule : true;
   const res = esModule
