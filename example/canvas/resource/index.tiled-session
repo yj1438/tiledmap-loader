@@ -3,13 +3,14 @@
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "全部文件 (*)",
     "fileStates": {
         "index.tiled.json": {
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 451,
-                "y": 779
+                "x": 437,
+                "y": 763
             }
         },
         "index.tiled.json#images": {
