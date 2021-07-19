@@ -8,6 +8,10 @@ export default class TiledData {
   }
 
   getObjectByName(name) {
-    return this.itemMapByName[name];
+    return this.getObjectListByName(name)[0];
+  }
+
+  getObjectListByName(name) {
+    return this.itemMapByName[name] || [];
   }
 }

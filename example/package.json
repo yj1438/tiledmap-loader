@@ -6,8 +6,8 @@
   "author": "yj138290",
   "license": "ISC",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "rm -rf www && webpack --mode=production",
+    "dev": "NODE_ENV=development webpack-dev-server",
+    "build": "rm -rf www && webpack",
     "build:analyzer": "rm -rf www && webpack --analyzer"
   },
   "browserslist": [

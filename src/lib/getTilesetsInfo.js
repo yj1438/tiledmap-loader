@@ -11,7 +11,7 @@ function getTileset(basePath, dirname) {
     const _gid = gid;
     gid = gid + 0;
     return {
-      ...JSON.parse(JSON.stringify(template.tileset)),
+      ...template.getTemplate('tileset'),
       tiles: [],
       firstgid: _gid,
       name: dirname,

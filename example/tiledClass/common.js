@@ -17,19 +17,27 @@ export function getTileGidMap(tiledJsonData) {
   return gidMap;
 }
 
+function fixBaseInfo(tiledItemInfo) {
+  const layoutInfo = calcPosAndRotation(tiledItemInfo); // 基础信息修正
+  tiledItemInfo.x = layoutInfo.x;
+  tiledItemInfo.y = layoutInfo.y;
+  tiledItemInfo.rotation = layoutInfo.rotation;
+  return tiledItemInfo;
+}
+
 /**
- * 获取内容 map，key 为 name
+ * 获取 named 元素信息
  * @param {Object} tiledJsonData 
  * @returns
  */
 export function getNamedObjectMap(tiledJsonData) {
   const objectMap = {};
-  debugger;
   tiledJsonData.layers.forEach(layer => {
     const name = layer.name;
     if (name) {
       layer.type = 'layer';
       objectMap[name] = objectMap[name] || [];
+      fixBaseInfo(layer);
       objectMap[name].push(layer);
     }
     layer.objects.forEach(obj => {
@@ -37,6 +45,7 @@ export function getNamedObjectMap(tiledJsonData) {
       if (_name) {
         obj.type = 'object';
         objectMap[_name] = objectMap[_name] || [];
+        fixBaseInfo(obj);
         objectMap[_name].push(obj);
       }
     });
@@ -61,6 +70,9 @@ function trigonometric(a, b) {
  * 1. tiled 的元素 anchor 默认是在左下，而且无法调整，这和 pixi 的不相符
  * 2. tiled 在旋转的同时，会根据原图片左下点的实际绝对坐标，调整 x/y 坐标值，非常反人类，需要进行计算修正
  * > https://discourse.mapeditor.org/t/why-does-rotation-change-x-y/4086
+ * @param {object} info tiled 生成的配置信息
+ * @param {boolean} canRotate 是否旋转
+ * @return {object} { x, y, rotation }
  */
 export function calcPosAndRotation(info, canRotate = false) {
   const {

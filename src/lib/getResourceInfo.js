@@ -19,6 +19,14 @@ function getVarName(imageName) {
 //   return _arr;
 // }
 
+/**
+ * 获取使用资源
+ * @param {Object} loadContext 
+ * @param {Object} jsonData 
+ * @param {Object} options 
+ * @param {Object} config 
+ * @returns {string} module content
+ */
 module.exports = function(loadContext, jsonData, options, config) {
   let content = '';
   //
@@ -36,12 +44,18 @@ module.exports = function(loadContext, jsonData, options, config) {
   });
   let importStr = '';
   let exportStr = '';
+  const esModule =
+    typeof options.esModule !== 'undefined' ? options.esModule : true;
   imageList.forEach(image => {
     const varName = getVarName(image);
-    importStr += 'import ' + varName + ' from \'./' + image + '\';\n';
+    importStr += esModule
+      ? 'import ' + varName + ' from \'./' + image + '\';\n'
+      : 'var ' + varName + ' = require(\'./' + image + '\');\n';
     exportStr += `  '${image}': ${varName},\n`;
   });
-  exportStr = `export default {\n${exportStr}}`;
+  exportStr = esModule
+    ? `export default {\n${exportStr}}`
+    : `module.exports = {\n${exportStr}}`;
   content += `\n${importStr}\n${exportStr}`;
   return content;
 };

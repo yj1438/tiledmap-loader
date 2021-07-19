@@ -1,7 +1,7 @@
 {
   "name": "tiledmap-loader",
   "author": "yinjie",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "For projects such as pixijs etx. , access to the visual editing capabilities of the tiled map tool.",
   "main": "dist/index.js",
   "scripts": {
@@ -55,6 +55,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
+    "eslint": "^7.31.0",
     "yargs": "^17.0.1"
   }
 }

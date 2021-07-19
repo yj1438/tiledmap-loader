@@ -20,14 +20,14 @@ export default {
     });
     this.root = this.app.stage;
   
-    // eg: TiledContainer
+    // eg1: TiledContainer
     const container = new TiledLayersContianer(tiledData.tiledJson, tiledData.resource);
     this.root.addChild(container);
     // 获取一个 PIXI 元素
     const items = container.getChildByName('layer1');
     console.log(items)
 
-    // eg: TiledJsonData
+    // eg2: TiledJsonData
     const tiledJsonData = new TiledJsonData(tiledData.tiledJson);
     console.log(tiledJsonData);
     // 获取一个元素的基础信息

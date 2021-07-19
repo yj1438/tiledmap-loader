@@ -22,6 +22,15 @@ const DefaultConfig = {
   height: 1624,
 };
 
+/**
+ * tiledmap-loader
+ * options: {
+ *   process
+ * }
+ * @param {*} content
+ * @param {*} map
+ * @param {*} meta
+ */
 module.exports = function(content, map, meta) {
   const self = this;
   const callback = self.async();
@@ -40,7 +49,7 @@ module.exports = function(content, map, meta) {
   const importResourcePath = requestPath.replace(Suffix, FilesName.resource);
   //
   self.cacheable(true);
-  //
+  // 获取 tiled tilesets 信息
   const tilesetsInfo = getTilesetsInfo(self, context, options, config);
   // 重写核心 json 文件
   let mainJson;
@@ -49,8 +58,8 @@ module.exports = function(content, map, meta) {
     cache.set(jsonFilePath, jsonFile);
     mainJson = contentFix.fixObjectGid(jsonFile, tilesetsInfo);
   } else {
-    mainJson = JSON.parse(JSON.stringify(template.main));
-    const layerJson = JSON.parse(JSON.stringify(template.layer));
+    mainJson = template.getTemplate('main');
+    const layerJson = template.getTemplate('layer');
     mainJson.width = config.width;
     mainJson.height = config.height;
     mainJson.layers.push(layerJson);
@@ -77,7 +86,7 @@ module.exports = function(content, map, meta) {
   // 检查 project 文件
   if (!fse.existsSync(projectFilePath)) {
     common.output('增加 tiled project 文件：' + projectFilePath);
-    fse.writeJSONSync(projectFilePath, template.tiledProject, { spaces: '  ' });
+    fse.writeJSONSync(projectFilePath, template.getTemplate('tiledProject'), { spaces: '  ' });
   }
   //
   const esModule =

@@ -98,7 +98,10 @@ const config = {
         use: [
           {
             loader: '../src/index.js',
-            options: {},
+            options: {
+              process: isDev,
+              esModule: true,
+            },
           },
         ],
       },

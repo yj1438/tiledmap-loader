@@ -1,4 +1,4 @@
-exports.main = {
+const main = {
   "compressionlevel": -1,
   "width": 750,
   "height": 1624,
@@ -18,7 +18,7 @@ exports.main = {
   "version": "1.6"
 };
 
-exports.layer = {
+const layer = {
   "draworder": "index",
   "id": 1,
   "name": "layer1",
@@ -30,7 +30,7 @@ exports.layer = {
   "y": 0
 };
 
-exports.tileset = {
+const tileset = {
   "columns": 0,
   "firstgid": 1,
   "grid": {
@@ -47,7 +47,7 @@ exports.tileset = {
   "tiles": []
 };
 
-exports.tiledProject = {
+const tiledProject = {
   "automappingRulesFile": "",
   "commands": [
   ],
@@ -57,3 +57,20 @@ exports.tiledProject = {
   ],
   "objectTypesFile": ""
 };
+
+const TemplateMap = {
+  main,
+  layer,
+  tileset,
+  tiledProject,
+};
+
+/**
+ * 获取模板对象
+ * @param {('main'|'layer'|'tileset'|'tiledProject')} name
+ */
+exports.getTemplate = function getTemplate(name) {
+  const tpl = TemplateMap[name];
+  if (!name) return null;
+  return JSON.parse(JSON.stringify(tpl));
+}

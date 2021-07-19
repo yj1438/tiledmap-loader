@@ -163,16 +163,44 @@ export default {
   },
 };
 ```
+## 2. 配置
 
-## 2. API
+## 2.1 .tiled
 
-### 2.1 method
+```
+dir: [images1, images2]
+width: 750
+height: 1624
+```
+
+* `dir` [必需] 图片资源文件夹，会按文件夹直接生成 tiled 里使用的 `collect` 图片集
+* `width` 画布尺寸，默认为 750
+* `height` 画布尺寸，默认为 1624
+
+## 2.2 loader
+
+```js
+{
+  loader: 'tiledmap-loader',
+  options: {
+    process: true,
+    esModule: true,
+  },
+},
+```
+
+* `process` 设置为 false 时，会直接路过初始化和相关文件的生成和检测，直接使用本地已经构建存在的文件。一般建议生产环境为 false，开发环境为 true;
+* `esModule` 生成和输出的文件内容规范，false 时为 commonjs
+
+## 3. API
+
+### 3.1 method
 
 **TiledLayersContianer**
 
 
-* `getChildByName(name): <PIXI.Container|PIXI.Sprite>` 根据 name 获取元素，name 重复的话返回第一个
-* `getChildrenByName(name): Array<PIXI.Container|PIXI.Sprite>` 根据 name 获取元素列表
+* `getChildByName(name): <PIXI.Container|PIXI.Sprite>` 根据 name 获取 PIXI 元素，name 重复的话返回第一个
+* `getChildrenByName(name): Array<PIXI.Container|PIXI.Sprite>` 根据 name 获取 PIXI 元素列表
 
 
 **TiledSprite**
@@ -180,6 +208,11 @@ export default {
 
 * `getProperties(): Array<Object>` 获取 tiled 里加的自定义属性
 * `doAction(actionName)` 执行自定义属性里的 action
+
+**TiledJsonData**
+
+* `getObjectListByName: Array<Object>` 根据 name 获取 tield 元素列表
+* `getObjectByName: Object` 根据 name 获取 tield 元素，name 重复的话返回第一个
 
 ## Example
 
