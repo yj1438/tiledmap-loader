@@ -106,7 +106,8 @@ console.warn(tiledData);
 
 #### 结合 Pixijs
 
-以上 tiledData 可以直接在项目中使用，目前也提供了 PIXI 的定制 Container，可以直接将 tiled 内容渲染出来。
+以上 tiledData 可以作为布局产物直接在项目中使用。
+另外，此 `loader` 也提供了 PIXI 的定制 Container，可以直接将 tiled 内容渲染出来。
 
 以上项目 `render.js` eg:
 
@@ -192,7 +193,7 @@ height: 1624
 * `process` 设置为 false 时，会直接路过初始化和相关文件的生成和检测，直接使用本地已经构建存在的文件。一般建议生产环境为 false，开发环境为 true;
 * `esModule` 生成和输出的文件内容规范，false 时为 commonjs
 
-## 3. API
+## 3. 内置应用类 API
 
 ### 3.1 method
 
