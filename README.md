@@ -105,7 +105,7 @@ console.warn(indexTiledData);
 */
 ```
 
-#### 使用 TiledData 数据
+#### 1.3.1 使用 TiledData 数据
 
 ```js
 import TiledData from 'tiledmap-loader/util/TiledData';
@@ -137,7 +137,7 @@ export default {
 * `resouce` 资源使用映射 js module
 * `tiledGidMap` Tiled 工具资源信息映射
 
-#### 结合 Pixijs
+#### 1.3.2 结合 Pixijs
 
 以上 tiledData 可以直接在项目中使用，目前也提供了 PIXI 的定制 Container，可以直接将 tiled 内容渲染出来。
 
@@ -173,13 +173,13 @@ export default {
 };
 ```
 
-#### 结合 Tinyjs
+#### 1.3.3 结合 Tinyjs
 
 同上，使用 `import TiledLayersContianer from 'tiledmap-loader/util/TiledLayersContianer.tinyjs';`
 
 ## 2. 配置
 
-## 2.1 .tiled
+### 2.1 .tiled
 
 ```
 dir: [images1, images2]
@@ -191,7 +191,7 @@ height: 1624
 * `width` 画布尺寸，默认为 750
 * `height` 画布尺寸，默认为 1624
 
-## 2.2 loader
+### 2.2 loader
 
 ```js
 {
