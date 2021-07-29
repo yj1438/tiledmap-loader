@@ -1,7 +1,7 @@
 import TiledLayersContianer from '../tiledClass/TiledLayersContianer.tinyjs';
-import tiledData from './resource/index.tiled';
+import indexTiledData from './resource/index.tiled';
 
-console.warn(tiledData);
+console.warn(indexTiledData);
 
 const tinyOption = {
   showFPS: true,
@@ -37,11 +37,15 @@ const canvas = {
     this._render();
   },
   _render() {
-    const container = new TiledLayersContianer(tiledData.tiledJson, tiledData.resource);
+    const container = new TiledLayersContianer(indexTiledData.tiledJson, indexTiledData.resource);
     this.root.addChild(container);
     // 获取一个 tiny 元素
-    const items = container.getChildByName('layer1');
-    console.log(items)
+    const item = container.getChildByName('layer1');
+    console.log(item);
+    // 获取一个(框)区域
+    const frame = container.getChildByName('frame');
+    const sprite = Tiny.Sprite.from('https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*sw6_QZgKyW8AAAAAAAAAAAAAARQnAQ');
+    frame.addChild(sprite);
   },
 };
 

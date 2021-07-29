@@ -6,11 +6,11 @@
     "file.lastUsedOpenFilter": "全部文件 (*)",
     "fileStates": {
         "index.tiled.json": {
-            "scale": 0.2604,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 140.16897081413208,
-                "y": 1442.0122887864823
+                "x": 107,
+                "y": 1003
             }
         },
         "index.tiled.json#images": {

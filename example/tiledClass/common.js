@@ -51,10 +51,10 @@ export function getProperties(tiledItemInfo = {}) {
   return obj;
 }
 
-export function fixTiledInfo(tiledItemInfo = {}, notLayer) {
+export function fixTiledInfo(tiledItemInfo = {}, isObject) {
   const info = {
     name: tiledItemInfo.name || '',
-    type: notLayer ? 'object' : 'layer',
+    type: isObject ? 'object' : 'layer',
     opacity: typeof tiledItemInfo.opacity === 'number' ? tiledItemInfo.opacity : 1,
     visible: tiledItemInfo.visible,
     height: tiledItemInfo.height,
@@ -62,10 +62,10 @@ export function fixTiledInfo(tiledItemInfo = {}, notLayer) {
     scale: 1,
     x: 0,
     y: 0,
-    anchor: { x: notLayer ? 0.5 : 0, y: notLayer ? 0.5 : 0 },
+    anchor: { x: isObject ? 0.5 : 0, y: isObject ? 0.5 : 0 },
     rotation: 0,
   };
-  const layoutInfo = calcPosAndRotation(tiledItemInfo, notLayer);
+  const layoutInfo = calcPosAndRotation(tiledItemInfo, isObject);
   info.x = layoutInfo.x;
   info.y = layoutInfo.y;
   info.rotation = layoutInfo.rotation;
@@ -95,6 +95,7 @@ function trigonometric(a, b) {
  */
 function calcPosAndRotation(drawInfo, canRotate = false) {
   const {
+    gid,
     x = 0,
     y = 0,
     offsetx = 0,
@@ -104,7 +105,11 @@ function calcPosAndRotation(drawInfo, canRotate = false) {
     rotation = 0, // 目前不支持
   } = drawInfo;
   // 默认修正到左上角
-  const pos = { x: x || offsetx, y: (y || offsety) - height, rotation: 0 };
+  
+  let pos = { x: x || offsetx, y: (y || offsety), rotation: 0 };
+  if (gid) {
+    pos = { x: x || offsetx, y: (y || offsety) - height, rotation: 0 };
+  }
   // 图片左下角 anchor 位置和旋转角度的修正
   if (canRotate) {
     if (rotation) {

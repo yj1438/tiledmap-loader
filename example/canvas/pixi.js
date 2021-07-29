@@ -1,8 +1,8 @@
 import TiledLayersContianer from '../tiledClass/TiledLayersContianer.pixi';
-import TiledJsonData from '../tiledClass/TiledJsonData';
-import tiledData from './resource/index.tiled';
+import TiledData from '../tiledClass/TiledData';
+import indexTiledData from './resource/index.tiled';
 
-console.warn(tiledData);
+console.warn(indexTiledData);
 
 export default {
   app: null,
@@ -22,18 +22,22 @@ export default {
     this.root = this.app.stage;
   
     // eg1: TiledContainer
-    const container = new TiledLayersContianer(tiledData.tiledJson, tiledData.resource);
+    const container = new TiledLayersContianer(indexTiledData.tiledJson, indexTiledData.resource);
     this.root.addChild(container);
     console.log(container)
     // 获取一个 PIXI 元素
-    const items = container.getChildByName('obj1');
-    console.log(items)
+    const item = container.getChildByName('obj1');
+    console.log(item);
+    // 获取一个(框)区域
+    const frame = container.getChildByName('frame');
+    const sprite = PIXI.Sprite.from('https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*sw6_QZgKyW8AAAAAAAAAAAAAARQnAQ');
+    frame.addChild(sprite);
 
     // eg2: TiledJsonData
-    const tiledJsonData = new TiledJsonData(tiledData.tiledJson, tiledData.resource);
-    console.log(tiledJsonData);
+    const tiledData = new TiledData(indexTiledData.tiledJson, indexTiledData.resource);
+    console.log(tiledData);
     // 获取一个元素的基础信息
-    const objs = tiledJsonData.getObjectByName('obj1');
-    console.log(objs); // { x, y, height, width, rotation, properties, visible }
+    const obj = tiledData.getObjectByName('bg');
+    console.log(obj); // { x, y, height, width, rotation, properties, visible }
   },
 };

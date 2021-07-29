@@ -1,12 +1,12 @@
-import TiledJsonData from './TiledJsonData';
+import TiledData from './TiledData';
 
 /**
  * 
- * @param {} tinyObj 
- * @param {} info
+ * @param {Tiny.Container | Tiny.Sprite} obj 
+ * @param {object} info
  */
-function layout(tinyObj, info = {}) {
-  tinyObj.tiledInfo = info;
+function layout(obj, info = {}) {
+  obj.tiledInfo = info;
   const {
     name = '',
     opacity = 1,
@@ -19,15 +19,15 @@ function layout(tinyObj, info = {}) {
     x = 0,
     y = 0,
   } = info;
-  tinyObj.name = name;
-  tinyObj.setVisible(visible);
-  tinyObj.setOpacity(opacity);
-  tinyObj.setPosition(x, y);
-  if (type === 'object') {
-    tinyObj.width = width;
-    tinyObj.height = height;
-    tinyObj.setAnchor(anchor.x, anchor.y);
-    tinyObj.setRotation(rotation / 180 * Math.PI)
+  obj.name = name;
+  obj.setVisible(visible);
+  obj.setOpacity(opacity);
+  obj.setPosition(x, y);
+  if (obj.constructor === Tiny.Sprite && type === 'object') {
+    obj.width = width;
+    obj.height = height;
+    obj.setAnchor(anchor.x, anchor.y);
+    obj.setRotation(rotation / 180 * Math.PI)
   }
 }
 
@@ -35,7 +35,7 @@ export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends T
   constructor(tiledJson, resource) {
     super();
     this.childrenMap = {};
-    this.tiledJsonData = new TiledJsonData(tiledJson, resource);
+    this.tiledData = new TiledData(tiledJson, resource);
     this.renderContent();
     //
   }
@@ -45,7 +45,7 @@ export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends T
    * @private
    */
   renderContent() {
-    const layers = this.tiledJsonData.renderInfo;
+    const layers = this.tiledData.renderInfo;
     (layers || []).forEach(layer => {
       const container = new Tiny.Container();
       layout(container, layer);
@@ -54,15 +54,22 @@ export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends T
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        // 先尝试从缓存中取
-        let texture = Tiny.TextureCache[obj.imageUrl];
-        if (!texture) {
-          texture = Tiny.Texture.fromImage(obj.imageUrl);
+        if (obj.imageUrl) {
+          // 先尝试从缓存中取
+          let texture = Tiny.TextureCache[obj.imageUrl];
+          if (!texture) {
+            texture = Tiny.Texture.fromImage(obj.imageUrl);
+          }
+          const sprite = new Tiny.Sprite(texture);
+          layout(sprite, obj);
+          container.addChild(sprite);
+          this._setChildrenMap(sprite);
+        } else {
+          const _container = new Tiny.Container();
+          layout(_container, obj);
+          container.addChild(_container);
+          this._setChildrenMap(_container);
         }
-        const sprite = new Tiny.Sprite(texture);
-        layout(sprite, obj);
-        container.addChild(sprite);
-        this._setChildrenMap(sprite);
       });
     });
   }

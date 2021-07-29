@@ -1,4 +1,4 @@
-import TiledJsonData from './TiledJsonData';
+import TiledData from './TiledData';
 
 /**
  * 布局等基础属性设置
@@ -23,7 +23,7 @@ function layout(obj, info = {}) {
   obj.visible = visible;
   obj.alpha = opacity;
   obj.position.set(x, y);
-  if (type === 'object') {
+  if (obj.constructor === PIXI.Sprite && type === 'object') {
     obj.width = width;
     obj.height = height;
     obj.anchor.set(anchor.x, anchor.y);
@@ -35,7 +35,7 @@ export default (PIXI.TiledLayersContianer = class TiledLayersContianer extends P
   constructor(tiledJson, resource) {
     super();
     this.childrenMap = {};
-    this.tiledJsonData = new TiledJsonData(tiledJson, resource);
+    this.tiledData = new TiledData(tiledJson, resource);
     this.renderContent();
   }
   
@@ -44,7 +44,7 @@ export default (PIXI.TiledLayersContianer = class TiledLayersContianer extends P
    * @private
    */
   renderContent() {
-    const layers = this.tiledJsonData.renderInfo;
+    const layers = this.tiledData.renderInfo;
     (layers || []).forEach(layer => {
       const container = new PIXI.Container();
       layout(container, layer);
@@ -53,14 +53,21 @@ export default (PIXI.TiledLayersContianer = class TiledLayersContianer extends P
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        let texture = PIXI.utils.TextureCache[obj.imageUrl];
-        if (!texture) {
-          texture = PIXI.Texture.fromImage(obj.imageUrl);
+        if (obj.imageUrl) {
+          let texture = PIXI.utils.TextureCache[obj.imageUrl];
+          if (!texture) {
+            texture = PIXI.Texture.fromImage(obj.imageUrl);
+          }
+          const sprite = new PIXI.Sprite(texture);
+          layout(sprite, obj);
+          container.addChild(sprite);
+          this._setChildrenMap(sprite);
+        } else {
+          const _container = new PIXI.Container();
+          layout(_container, obj);
+          container.addChild(_container);
+          this._setChildrenMap(_container);
         }
-        const sprite = new PIXI.Sprite(texture);
-        layout(sprite, obj);
-        container.addChild(sprite);
-        this._setChildrenMap(sprite);
       });
     });
   }
