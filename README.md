@@ -2,7 +2,7 @@
 
 ## What is tiled map loader
 
-For projects such as pixijs etx. , access to the visual editing capabilities of the tiled map tool.
+For Canvas projects such as pixijs etx. , access to the visual editing capabilities of the Tiled map tool.
 
 webpack-loader，可以将 [Tiled](https://www.mapeditor.org/) 工具直接应用于 canvas 项目，如 pixijs 等，通过 Tiled 工具对项目内的视觉内容进行直接的可视化编辑。
 
@@ -12,7 +12,7 @@ webpack-loader，可以将 [Tiled](https://www.mapeditor.org/) 工具直接应�
 
 `npm i --save tiledmap-loader`
 
-这里注意要加入 dependencies，而不是 devDependencies，因为后续项目中可能会用到 `tiledmap-loader/util` 下的内容。
+这里注意要加入 dependencies，而不是 devDependencies，后续项目中可能会用到 `tiledmap-loader/util` 下的内容。
 
 ### 1.2 前置工作
 
