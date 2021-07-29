@@ -43,6 +43,7 @@ const jsLoader = [
 
 const config = {
   entry: {
+    'TiledData': './example/tiledClass/TiledData.js',
     'TiledJsonData': './example/tiledClass/TiledJsonData.js',
     'TiledLayersContianer.pixi': './example/tiledClass/TiledLayersContianer.pixi.js',
     'TiledLayersContianer.tinyjs': './example/tiledClass/TiledLayersContianer.tinyjs.js',
