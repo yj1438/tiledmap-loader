@@ -1,43 +1,41 @@
-import { getTileGidMap, calcPosAndRotation } from './common';
+import TiledData from './TiledData';
 
 /**
  * 
- * @param {} tinyObj 
- * @param {} info
+ * @param {Tiny.Container | Tiny.Sprite} obj 
+ * @param {object} info
  */
-function layout(tinyObj, info = {}) {
+function layout(obj, info = {}) {
+  obj.tiledInfo = info;
   const {
-    x = 0,
-    y = 0,
     name = '',
     opacity = 1,
     visible = true,
-    rotation = 0,
     height = 0,
     width = 0,
+    type = '',
+    anchor = {},
+    rotation = 0,
+    x = 0,
+    y = 0,
   } = info;
-  tinyObj.name = name;
-  tinyObj.setVisible(visible);
-  tinyObj.setOpacity(opacity);
-  if (tinyObj.constructor === Tiny.Sprite) {
-    const posAndRotation = calcPosAndRotation(info, true);
-    tinyObj.width = width;
-    tinyObj.height = height;
-    tinyObj.setAnchor(0.5, 0.5);
-    tinyObj.setPosition(posAndRotation.x, posAndRotation.y); // 这里需要注意下，tiled 的元素锚点在左下
-    tinyObj.setRotation(posAndRotation.rotation / 180 * Math.PI)
-  } else {
-    tinyObj.setPosition(x, y - height); // 这里需要注意下，tiled 的元素锚点在左下
+  obj.name = name;
+  obj.setVisible(visible);
+  obj.setOpacity(opacity);
+  obj.setPosition(x, y);
+  if (obj.constructor === Tiny.Sprite && type === 'object') {
+    obj.width = width;
+    obj.height = height;
+    obj.setAnchor(anchor.x, anchor.y);
+    obj.setRotation(rotation / 180 * Math.PI)
   }
 }
 
 export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends Tiny.Container {
-  constructor(tiledJsonData, resource) {
+  constructor(tiledJson, resource) {
     super();
     this.childrenMap = {};
-    this.tiledJsonData = tiledJsonData;
-    this.resource = resource;
-    this.gidMap = getTileGidMap(tiledJsonData);
+    this.tiledData = new TiledData(tiledJson, resource);
     this.renderContent();
     //
   }
@@ -47,7 +45,7 @@ export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends T
    * @private
    */
   renderContent() {
-    const layers = this.tiledJsonData.layers;
+    const layers = this.tiledData.renderInfo;
     (layers || []).forEach(layer => {
       const container = new Tiny.Container();
       layout(container, layer);
@@ -56,20 +54,21 @@ export default (Tiny.TiledLayersContianer = class TiledLayersContianer extends T
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        const gid = obj.gid;
-        const tileInfo = this.gidMap[gid];
-        if (tileInfo) {
+        if (obj.imageUrl) {
           // 先尝试从缓存中取
-          const imageName = tileInfo.image;
-          const imageUrl = this.resource[imageName];
-          let texture = Tiny.TextureCache[imageUrl];
+          let texture = Tiny.TextureCache[obj.imageUrl];
           if (!texture) {
-            texture = Tiny.Texture.fromImage(imageUrl);
+            texture = Tiny.Texture.fromImage(obj.imageUrl);
           }
           const sprite = new Tiny.Sprite(texture);
           layout(sprite, obj);
           container.addChild(sprite);
           this._setChildrenMap(sprite);
+        } else {
+          const _container = new Tiny.Container();
+          layout(_container, obj);
+          container.addChild(_container);
+          this._setChildrenMap(_container);
         }
       });
     });

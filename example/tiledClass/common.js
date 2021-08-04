@@ -17,44 +17,63 @@ export function getTileGidMap(tiledJsonData) {
   return gidMap;
 }
 
-function fixBaseInfo(tiledItemInfo) {
-  const layoutInfo = calcPosAndRotation(tiledItemInfo); // 基础信息修正
-  tiledItemInfo.x = layoutInfo.x;
-  tiledItemInfo.y = layoutInfo.y;
-  tiledItemInfo.rotation = layoutInfo.rotation;
-  return tiledItemInfo;
-}
-
 /**
- * 获取 named 元素信息
- * @param {Object} tiledJsonData 
- * @returns
- */
-export function getNamedObjectMap(tiledJsonData) {
-  const objectMap = {};
-  tiledJsonData.layers.forEach(layer => {
-    const name = layer.name;
-    if (name) {
-      layer.type = 'layer';
-      objectMap[name] = objectMap[name] || [];
-      fixBaseInfo(layer);
-      objectMap[name].push(layer);
-    }
-    layer.objects.forEach(obj => {
-      const _name = obj.name;
-      if (_name) {
-        obj.type = 'object';
-        objectMap[_name] = objectMap[_name] || [];
-        fixBaseInfo(obj);
-        objectMap[_name].push(obj);
+ * 获取 properties object
+ * @param {Object} drawInfo tiled 生成的 layer/object 配置信息，
+ * [
+ *   {
+        "name": "layoutRef",
+        "type": "string",
+        "value": "left,top"
       }
-    });
+ * ]
+ */
+export function getProperties(tiledItemInfo = {}) {
+  const { properties = [] } = tiledItemInfo;
+  const obj = {};
+  properties.forEach(p => {
+    let value = p.value;
+    if (typeof value === 'string') {
+      let valueArr = value.split(',');
+      if (valueArr.length > 1) {
+        value = valueArr.map(v => v.trim());
+      }
+    }
+    if (!obj[p.name]) {
+      obj[p.name] = value;
+    } else {
+      if (Object.prototype.toString.call(obj[p.name]) !== '[object Array]') {
+        obj[p.name] = [obj[p.name]];
+      } 
+      obj[p.name].push(value);
+    }
   });
-  return objectMap;
+  return obj;
+}
+
+export function fixTiledInfo(tiledItemInfo = {}, isObject) {
+  const info = {
+    name: tiledItemInfo.name || '',
+    type: isObject ? 'object' : 'layer',
+    opacity: typeof tiledItemInfo.opacity === 'number' ? tiledItemInfo.opacity : 1,
+    visible: tiledItemInfo.visible,
+    height: tiledItemInfo.height,
+    width: tiledItemInfo.width,
+    scale: 1,
+    x: 0,
+    y: 0,
+    anchor: { x: isObject ? 0.5 : 0, y: isObject ? 0.5 : 0 },
+    rotation: 0,
+  };
+  const layoutInfo = calcPosAndRotation(tiledItemInfo, isObject);
+  info.x = layoutInfo.x;
+  info.y = layoutInfo.y;
+  info.rotation = layoutInfo.rotation;
+  return info;
 }
 
 /**
- * 三角形长边
+ * 求三角形长边
  * @param {number} a
  * @param {number} b
  * @returns 
@@ -70,19 +89,27 @@ function trigonometric(a, b) {
  * 1. tiled 的元素 anchor 默认是在左下，而且无法调整，这和 pixi 的不相符
  * 2. tiled 在旋转的同时，会根据原图片左下点的实际绝对坐标，调整 x/y 坐标值，非常反人类，需要进行计算修正
  * > https://discourse.mapeditor.org/t/why-does-rotation-change-x-y/4086
- * @param {object} info tiled 生成的配置信息
+ * @param {object} drawInfo tiled 生成的 layer/object 配置信息，
  * @param {boolean} canRotate 是否旋转
  * @return {object} { x, y, rotation }
  */
-export function calcPosAndRotation(info, canRotate = false) {
+function calcPosAndRotation(drawInfo, canRotate = false) {
   const {
+    gid,
     x = 0,
     y = 0,
+    offsetx = 0,
+    offsety = 0,
     height = 0,
     width = 0,
     rotation = 0, // 目前不支持
-  } = info;
-  const pos = { x: x, y: y - height, rotation: 0 }; // 默认修正到左上角
+  } = drawInfo;
+  // 默认修正到左上角
+  
+  let pos = { x: x || offsetx, y: (y || offsety), rotation: 0 };
+  if (gid) {
+    pos = { x: x || offsetx, y: (y || offsety) - height, rotation: 0 };
+  }
   // 图片左下角 anchor 位置和旋转角度的修正
   if (canRotate) {
     if (rotation) {

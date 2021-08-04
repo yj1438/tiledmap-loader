@@ -1,45 +1,42 @@
-import { getTileGidMap, calcPosAndRotation } from './common';
+import TiledData from './TiledData';
 
 /**
  * 布局等基础属性设置
- * @param {} tinyObj 
- * @param {} info
+ * @param {PIXI.Container | PIXI.Sprite}
+ * @param {Object} info
  */
 function layout(obj, info = {}) {
+  obj.tiledInfo = info;
   const {
-    x = 0,
-    y = 0,
     name = '',
     opacity = 1,
     visible = true,
-    rotation = 0,
     height = 0,
     width = 0,
+    type = '',
+    anchor = {},
+    rotation = 0,
+    x = 0,
+    y = 0,
   } = info;
   obj.name = name;
   obj.visible = visible;
   obj.alpha = opacity;
-  if (obj.constructor === PIXI.Sprite) {
-    const posAndRotation = calcPosAndRotation(info, true);
+  obj.position.set(x, y);
+  if (obj.constructor === PIXI.Sprite && type === 'object') {
     obj.width = width;
     obj.height = height;
-    obj.anchor.set(0.5, 0.5);
-    obj.position.set(posAndRotation.x, posAndRotation.y); // 这里需要注意下，tiled 的元素锚点在左下
-    obj.angle = posAndRotation.rotation;
-  } else {
-    obj.position.set(x, y - height); // 这里需要注意下，tiled 的元素锚点在左下
+    obj.anchor.set(anchor.x, anchor.y);
+    obj.angle = rotation;
   }
 }
 
 export default (PIXI.TiledLayersContianer = class TiledLayersContianer extends PIXI.Container {
-  constructor(tiledJsonData, resource) {
+  constructor(tiledJson, resource) {
     super();
     this.childrenMap = {};
-    this.tiledJsonData = tiledJsonData;
-    this.resource = resource;
-    this.gidMap = getTileGidMap(tiledJsonData);
+    this.tiledData = new TiledData(tiledJson, resource);
     this.renderContent();
-    //
   }
   
   /**
@@ -47,7 +44,7 @@ export default (PIXI.TiledLayersContianer = class TiledLayersContianer extends P
    * @private
    */
   renderContent() {
-    const layers = this.tiledJsonData.layers;
+    const layers = this.tiledData.renderInfo;
     (layers || []).forEach(layer => {
       const container = new PIXI.Container();
       layout(container, layer);
@@ -56,20 +53,20 @@ export default (PIXI.TiledLayersContianer = class TiledLayersContianer extends P
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        const gid = obj.gid;
-        const tileInfo = this.gidMap[gid];
-        if (tileInfo) {
-          // 先尝试从缓存中取
-          const imageName = tileInfo.image;
-          const imageUrl = this.resource[imageName];
-          let texture = PIXI.utils.TextureCache[imageUrl];
+        if (obj.imageUrl) {
+          let texture = PIXI.utils.TextureCache[obj.imageUrl];
           if (!texture) {
-            texture = PIXI.Texture.fromImage(imageUrl);
+            texture = PIXI.Texture.fromImage(obj.imageUrl);
           }
           const sprite = new PIXI.Sprite(texture);
           layout(sprite, obj);
           container.addChild(sprite);
           this._setChildrenMap(sprite);
+        } else {
+          const _container = new PIXI.Container();
+          layout(_container, obj);
+          container.addChild(_container);
+          this._setChildrenMap(_container);
         }
       });
     });

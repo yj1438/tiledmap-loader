@@ -47,46 +47,51 @@ module.exports = function(content, map, meta) {
   const requestPath = loaderUtils.stringifyRequest(self, resourcePath); //
   const importJsonPath = requestPath.replace(Suffix, FilesName.json);
   const importResourcePath = requestPath.replace(Suffix, FilesName.resource);
-  //
-  self.cacheable(true);
-  // 获取 tiled tilesets 信息
-  const tilesetsInfo = getTilesetsInfo(self, context, options, config);
-  // 重写核心 json 文件
-  let mainJson;
-  if (fse.existsSync(jsonFilePath)) {
-    const jsonFile = fse.readJSONSync(jsonFilePath, { encoding: 'utf8' });
-    cache.set(jsonFilePath, jsonFile);
-    mainJson = contentFix.fixObjectGid(jsonFile, tilesetsInfo);
+  // options.process 为 false 时，直接使用本地文件，不走编译
+  if (options.process === false) {
+    console.log('\n>>>>>>\n process === false: tiledmap-loader 不执行，直接使用本地已构建文件。\n>>>>>>')
   } else {
-    mainJson = template.getTemplate('main');
-    const layerJson = template.getTemplate('layer');
-    mainJson.width = config.width;
-    mainJson.height = config.height;
-    mainJson.layers.push(layerJson);
-    mainJson.nextlayerid = layerJson.id + 1;
-    mainJson.tilesets = tilesetsInfo;
-  }
-  if (cache.isChange(jsonFilePath, mainJson)) {
-    common.output('重写 json 文件');
-    fse.writeJSONSync(jsonFilePath, mainJson, { spaces: '  ' });
-    cache.set(jsonFilePath, mainJson);
-  }
-  this.addDependency(jsonFilePath); // 将 tiled json 文件加入依赖监听，会涉及 resource 文件的修改
-  // 重写资源文件
-  if (fse.existsSync(resourceFilePath)) {
-    const resourceFile = fse.readFileSync(resourceFilePath, { encoding: 'utf8' });
-    cache.set(resourceFilePath, resourceFile);
-  }
-  const resourceJs = getResourceInfo(self, mainJson, options, config);
-  if (cache.isChange(resourceFilePath, resourceJs)) {
-    common.output('重写 resource 文件');
-    fse.writeFileSync(resourceFilePath, resourceJs, { encoding: 'utf8' });
-    cache.set(resourceFilePath, resourceJs);
-  }
-  // 检查 project 文件
-  if (!fse.existsSync(projectFilePath)) {
-    common.output('增加 tiled project 文件：' + projectFilePath);
-    fse.writeJSONSync(projectFilePath, template.getTemplate('tiledProject'), { spaces: '  ' });
+    //
+    self.cacheable(true);
+    // 获取 tiled tilesets 信息
+    const tilesetsInfo = getTilesetsInfo(self, context, options, config);
+    // 重写核心 json 文件
+    let mainJson;
+    if (fse.existsSync(jsonFilePath)) {
+      const jsonFile = fse.readJSONSync(jsonFilePath, { encoding: 'utf8' });
+      cache.set(jsonFilePath, jsonFile);
+      mainJson = contentFix.fixObjectGid(jsonFile, tilesetsInfo);
+    } else {
+      mainJson = template.getTemplate('main');
+      const layerJson = template.getTemplate('layer');
+      mainJson.width = config.width;
+      mainJson.height = config.height;
+      mainJson.layers.push(layerJson);
+      mainJson.nextlayerid = layerJson.id + 1;
+      mainJson.tilesets = tilesetsInfo;
+    }
+    if (cache.isChange(jsonFilePath, mainJson)) {
+      common.output('重写 json 文件');
+      fse.writeJSONSync(jsonFilePath, mainJson, { spaces: '  ' });
+      cache.set(jsonFilePath, mainJson);
+    }
+    this.addDependency(jsonFilePath); // 将 tiled json 文件加入依赖监听，会涉及 resource 文件的修改
+    // 重写资源文件
+    if (fse.existsSync(resourceFilePath)) {
+      const resourceFile = fse.readFileSync(resourceFilePath, { encoding: 'utf8' });
+      cache.set(resourceFilePath, resourceFile);
+    }
+    const resourceJs = getResourceInfo(self, mainJson, options, config);
+    if (cache.isChange(resourceFilePath, resourceJs)) {
+      common.output('重写 resource 文件');
+      fse.writeFileSync(resourceFilePath, resourceJs, { encoding: 'utf8' });
+      cache.set(resourceFilePath, resourceJs);
+    }
+    // 检查 project 文件
+    if (!fse.existsSync(projectFilePath)) {
+      common.output('增加 tiled project 文件：' + projectFilePath);
+      fse.writeJSONSync(projectFilePath, template.getTemplate('tiledProject'), { spaces: '  ' });
+    }
   }
   //
   const esModule =
