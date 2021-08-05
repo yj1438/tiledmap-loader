@@ -45,8 +45,8 @@ const config = {
   entry: {
     'TiledData': './example/tiledClass/TiledData.js',
     'TiledJsonData': './example/tiledClass/TiledJsonData.js',
-    'TiledLayersContianer.pixi': './example/tiledClass/TiledLayersContianer.pixi.js',
-    'TiledLayersContianer.tinyjs': './example/tiledClass/TiledLayersContianer.tinyjs.js',
+    'TiledLayersContainer.pixi': './example/tiledClass/TiledLayersContainer.pixi.js',
+    'TiledLayersContainer.tinyjs': './example/tiledClass/TiledLayersContainer.tinyjs.js',
   },
   output: {
     path: path.resolve('./util/'),

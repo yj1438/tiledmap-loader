@@ -1,4 +1,4 @@
-import TiledLayersContianer from '../tiledClass/TiledLayersContianer.pixi';
+import TiledLayersContainer from '../tiledClass/TiledLayersContainer.pixi';
 import TiledData from '../tiledClass/TiledData';
 import indexTiledData from './resource/index.tiled';
 
@@ -28,7 +28,7 @@ export default {
       width: this.app.screen.width,
       height: this.app.screen.height,
     };
-    const container = new TiledLayersContianer(indexTiledData.tiledJson, indexTiledData.resource, canvasOption);
+    const container = new TiledLayersContainer(indexTiledData.tiledJson, indexTiledData.resource, canvasOption);
     this.root.addChild(container);
     console.log(container)
     // 获取一个 PIXI 元素

@@ -1,13 +1,15 @@
-import TiledLayersContianer from '../tiledClass/TiledLayersContianer.tinyjs';
+import TiledLayersContainer from '../tiledClass/TiledLayersContainer.tinyjs';
 import indexTiledData from './resource/index.tiled';
 
 console.warn(indexTiledData);
 
+const width = 640;
+const height = 1624;
 const tinyOption = {
   showFPS: true,
   viewTouched: true, // 支持滑动
-  referWidth: 375,
-  // height: 590,
+  referWidth: width / 2,
+  height: height / 2,
   dpi: 2,
   canvasId: 'J_canvas',
   renderType: 2, // {UNKNOWN: 0, WEBGL: 1, CANVAS: 2}
@@ -37,7 +39,7 @@ const canvas = {
     this._render();
   },
   _render() {
-    const container = new TiledLayersContianer(indexTiledData.tiledJson, indexTiledData.resource);
+    const container = new TiledLayersContainer(indexTiledData.tiledJson, indexTiledData.resource, { width: width, height: height });
     this.root.addChild(container);
     // 获取一个 tiny 元素
     const item = container.getChildByName('layer1');

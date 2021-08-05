@@ -145,7 +145,7 @@ export default {
 以上项目 `render.js` eg:
 
 ```js
-import TiledLayersContianer from 'tiledmap-loader/util/TiledLayersContianer.pixi';
+import TiledLayersContainer from 'tiledmap-loader/util/TiledLayersContainer.pixi';
 import indexTiledData from './resource/index.tiled';
 
 console.warn(indexTiledData);
@@ -165,7 +165,7 @@ export default {
     this.root = this.app.stage;
   
     // eg: TiledContainer
-    const container = new TiledLayersContianer(indexTiledData.tiledJson, indexTiledData.resource);
+    const container = new TiledLayersContainer(indexTiledData.tiledJson, indexTiledData.resource);
     this.root.addChild(container);
     // 获取一个 PIXI 元素
     const item = container.getChildByName('layer1');
@@ -176,7 +176,7 @@ export default {
 
 #### 1.3.3 结合 Tinyjs
 
-同上，使用 `import TiledLayersContianer from 'tiledmap-loader/util/TiledLayersContianer.tinyjs';`
+同上，使用 `import TiledLayersContainer from 'tiledmap-loader/util/TiledLayersContainer.tinyjs';`
 
 ## 2. 配置
 
@@ -224,7 +224,7 @@ height: 1624
 * resource
 * tiledJson
 
-### 3.2 **TiledLayersContianer**
+### 3.2 **TiledLayersContainer**
 
 **method**
 
