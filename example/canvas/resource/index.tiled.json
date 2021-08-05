@@ -30,7 +30,7 @@
           "visible": true,
           "width": 750,
           "x": 0,
-          "y": 1624
+          "y": 1334
         },
         {
           "gid": 2,
@@ -48,37 +48,20 @@
           "type": "",
           "visible": true,
           "width": 107.945431530217,
-          "x": 74.2851158064484,
-          "y": 1398.72607358965
+          "x": 95.4972370185696,
+          "y": 1115.81818181818
         },
         {
           "gid": 3,
           "height": 328.165898617512,
           "id": 6,
           "name": "obj2",
-          "properties": [
-            {
-              "name": "test",
-              "type": "int",
-              "value": 4
-            },
-            {
-              "name": "test2",
-              "type": "float",
-              "value": 2.3
-            },
-            {
-              "name": "test3",
-              "type": "bool",
-              "value": false
-            }
-          ],
           "rotation": 0,
           "type": "",
           "visible": true,
           "width": 326.804915514593,
-          "x": 385.463447211191,
-          "y": 1326.33920691355
+          "x": 391.524053271797,
+          "y": 1030.9696969697
         },
         {
           "height": 149.827122550903,
@@ -88,8 +71,8 @@
           "type": "",
           "visible": true,
           "width": 213.855807401716,
-          "x": 0,
-          "y": 446
+          "x": 84.8484848484853,
+          "y": 230.969696969697
         },
         {
           "height": 0,
@@ -100,11 +83,20 @@
           "type": "",
           "visible": true,
           "width": 0,
-          "x": 310,
-          "y": 974
+          "x": 173.636363636363,
+          "y": 549.151515151515
         }
       ],
+      "offsetx": 0,
+      "offsety": 145,
       "opacity": 1,
+      "properties": [
+        {
+          "name": "layoutRef",
+          "type": "string",
+          "value": "center,top"
+        }
+      ],
       "type": "objectgroup",
       "visible": true,
       "x": 0,
@@ -126,7 +118,7 @@
   "nextobjectid": 15,
   "orientation": "orthogonal",
   "renderorder": "left-up",
-  "tiledversion": "1.7.0",
+  "tiledversion": "1.7.1",
   "tileheight": 1,
   "tilesets": [
     {

@@ -241,19 +241,41 @@ height: 1624
 
 * tiledData: TiledData 的实例
 
-## Example
+## 4. 自定义参数
+
+### 4.1 layoutRef
+
+说明：相对布局
+
+适用元素：layer
+
+值(X 方向,Y 方向)：
+  - 默认：`left,top`;
+  - X 方向：`left`、`center`、`right`
+  - Y 方向：`top`、`center`、`bottom`
+
+![](https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*qUMSQLu7wHIAAAAAAAAAAAAAARQnAQ)
+
+## 5. Example
 
 `example`
 
-## 4. 使用场景 and 最佳实践
+## 6. 使用场景 and 最佳实践
 
-### 4.1 适用的场景
+### 6.1 适用的场景
 
 * 建议按实际项目的视觉层级和逻辑情况，拆分成多个 `.tiled` 文件夹，分层、分区域编辑。
 * 灵活使用 tiled 编辑时提供的“自定义属性”能力，和业务逻辑相结合。
 
-## 5. TODO
+## 7. TODO
 
 * 复杂布局完善
 * tileset 图片集支持
 * 动效支持
+* 选区处理
+* 无效占位图
+
+## Change Log
+
+* 0.1.0
+  - 支持 X 方向,Y 方向的相对布局，通过自定义参数 `layoutRef`

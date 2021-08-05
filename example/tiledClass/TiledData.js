@@ -1,4 +1,4 @@
-import { getTileGidMap, fixTiledInfo, getProperties } from './common';
+import { getTileGidMap, fixTiledInfo } from './common';
 
 export default class TiledData {
   /**
@@ -6,9 +6,10 @@ export default class TiledData {
    * @param {Object} tiledJson 
    * @param {Object<module>} resource 
    */
-  constructor(tiledJson, resource) {
+  constructor(tiledJson, resource, canvasOption = {}) {
     this.tiledJson = tiledJson;
     this.resource = resource;
+    this.canvasOption = canvasOption;
     this.tiledGidMap = getTileGidMap(tiledJson);
     this.renderInfo = this._getRenderInfo();
     this.itemMapByName = this._getItemMapByName();
@@ -22,12 +23,22 @@ export default class TiledData {
     return this.itemMapByName[name] || [];
   }
 
+  /**
+   * 获取渲染树
+   * @returns
+   */
   _getRenderInfo() {
-    const info = (this.tiledJson.layers || []).map(layer => {
-      const layerInfo = fixTiledInfo(layer, false);
-      layerInfo.properties = getProperties(layer);
+    const layers = (this.tiledJson.layers || []);
+    const globalOption = {
+      width: this.tiledJson.width,
+      height: this.tiledJson.height,
+      canvasWidth: this.canvasOption.width,
+      canvasHeight: this.canvasOption.height,
+    };
+    const info = layers.map(layer => {
+      const layerInfo = fixTiledInfo(layer, false, globalOption);
       layerInfo.objects = (layer.objects || []).map(obj => {
-        const objectInfo = fixTiledInfo(obj, true);
+        const objectInfo = fixTiledInfo(obj, true, globalOption);
         const gid = obj.gid;
         if (gid) {
           const tileInfo = this.tiledGidMap[gid];
@@ -35,7 +46,6 @@ export default class TiledData {
           objectInfo.imageName = tileInfo.image;
           objectInfo.imageUrl = this.resource[tileInfo.image];
         }
-        objectInfo.properties = getProperties(obj);
         return objectInfo;
       });
       return layerInfo;
@@ -43,6 +53,10 @@ export default class TiledData {
     return info;
   }
 
+  /**
+   * 获取有 name 的元素 map
+   * @returns
+   */
   _getItemMapByName() {
     const objectMap = {};
     this.renderInfo.forEach(layer => {

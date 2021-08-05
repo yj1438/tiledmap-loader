@@ -32,10 +32,10 @@ function layout(obj, info = {}) {
 }
 
 export default (PIXI.TiledLayersContianer = class TiledLayersContianer extends PIXI.Container {
-  constructor(tiledJson, resource) {
+  constructor(tiledJson, resource, canvasOption) {
     super();
     this.childrenMap = {};
-    this.tiledData = new TiledData(tiledJson, resource);
+    this.tiledData = new TiledData(tiledJson, resource, canvasOption);
     this.renderContent();
   }
   

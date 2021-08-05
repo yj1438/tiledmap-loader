@@ -8,21 +8,27 @@ export default {
   app: null,
   root: null,
   init() {
+    const width = 750;
     const height = 1624;
     const view = document.getElementById('J_canvas');
-    view.style.width = '375px';
+    view.style.width = `${width / 2}px`;
     view.style.height = `${height / 2}px`;
     this.app = new PIXI.Application({
       view,
-      width: 750,
+      width: width,
       height: height,
       antialias: true,
       backgroundColor: 0x98d8ff
     });
+    PIXI._app = this.app;
     this.root = this.app.stage;
   
     // eg1: TiledContainer
-    const container = new TiledLayersContianer(indexTiledData.tiledJson, indexTiledData.resource);
+    const canvasOption = {
+      width: this.app.screen.width,
+      height: this.app.screen.height,
+    };
+    const container = new TiledLayersContianer(indexTiledData.tiledJson, indexTiledData.resource, canvasOption);
     this.root.addChild(container);
     console.log(container)
     // 获取一个 PIXI 元素
@@ -34,7 +40,7 @@ export default {
     frame.addChild(sprite);
 
     // eg2: TiledJsonData
-    const tiledData = new TiledData(indexTiledData.tiledJson, indexTiledData.resource);
+    const tiledData = new TiledData(indexTiledData.tiledJson, indexTiledData.resource, canvasOption);
     console.log(tiledData);
     // 获取一个元素的基础信息
     const obj = tiledData.getObjectByName('bg');

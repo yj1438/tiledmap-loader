@@ -28,7 +28,7 @@ export function getTileGidMap(tiledJsonData) {
       }
  * ]
  */
-export function getProperties(tiledItemInfo = {}) {
+function getProperties(tiledItemInfo = {}) {
   const { properties = [] } = tiledItemInfo;
   const obj = {};
   properties.forEach(p => {
@@ -51,7 +51,13 @@ export function getProperties(tiledItemInfo = {}) {
   return obj;
 }
 
-export function fixTiledInfo(tiledItemInfo = {}, isObject) {
+/**
+ * 重新组装渲染数据
+ * @tiledItemInfo {Object} Tiled 原始产物 
+ * @isObject {boolean} 是否是 object 元素
+ * @globalOpation {Object} 全局配置
+ */
+export function fixTiledInfo(tiledItemInfo = {}, isObject, globalOpation) {
   const info = {
     name: tiledItemInfo.name || '',
     type: isObject ? 'object' : 'layer',
@@ -66,9 +72,11 @@ export function fixTiledInfo(tiledItemInfo = {}, isObject) {
     rotation: 0,
   };
   const layoutInfo = calcPosAndRotation(tiledItemInfo, isObject);
+  info.properties = getProperties(tiledItemInfo);
   info.x = layoutInfo.x;
   info.y = layoutInfo.y;
   info.rotation = layoutInfo.rotation;
+  fixLayout(info, globalOpation);
   return info;
 }
 
@@ -136,4 +144,47 @@ function calcPosAndRotation(drawInfo, canRotate = false) {
     pos.rotation = rotation;
   }
   return pos;
+}
+
+/**
+ * 布局修正
+ * 1. right / bottom 等定位
+ */
+function fixLayout(layoutInfo, globalOpation) {
+  let layoutRef = layoutInfo.properties.layoutRef || ['left', 'top'];
+  if (layoutRef === 'center') {
+    layoutRef = ['center', 'center'];
+  }
+  layoutRef = layoutRef.slice(0, 2);
+  const layoutRefX = layoutRef.indexOf('left') >= 0
+    ? 'left'
+    : layoutRef.indexOf('right') >= 0
+      ? 'right'
+      : layoutRef.indexOf('center') >= 0
+        ? 'center' : 'left';
+  const layoutRefY = layoutRef.indexOf('top') >= 0
+    ? 'top'
+    : layoutRef.indexOf('bottom') >= 0
+      ? 'bottom'
+      : layoutRef.indexOf('center') >= 0
+        ? 'center' : 'top';
+  
+  // const position = layoutInfo.properties.position || 'absolute';
+  if (layoutInfo.type === 'layer') {
+    // 修正布局
+    if (layoutRefX === 'left') {
+      layoutInfo.x = layoutInfo.x;
+    } else if (layoutRefX === 'right') {
+      layoutInfo.x = globalOpation.canvasWidth - (globalOpation.width - layoutInfo.x);
+    } else if (layoutRefX === 'center') {
+      layoutInfo.x = globalOpation.canvasWidth / 2 - (globalOpation.width / 2 - layoutInfo.x);
+    }
+    if (layoutRefY === 'top') {
+      layoutInfo.y = layoutInfo.y;
+    } else if (layoutRefY === 'bottom') {
+      layoutInfo.y = globalOpation.canvasHeight - (globalOpation.height - layoutInfo.y);
+    } else if (layoutRefY === 'center') {
+      layoutInfo.y = globalOpation.canvasHeight / 2 - (globalOpation.height / 2 - layoutInfo.y);
+    }
+  }
 }
