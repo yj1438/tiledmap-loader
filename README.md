@@ -288,3 +288,7 @@ height: 1624
 
 * 0.1.0
   - 支持 X 方向,Y 方向的相对布局，通过自定义参数 `layoutRef`
+* 0.1.1
+  - 优化 `layoutRef` 布局
+* 0.1.2
+  - 支持整体 container 的`layoutRef` 布局
