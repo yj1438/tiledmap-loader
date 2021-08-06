@@ -24,11 +24,15 @@ export default {
     this.root = this.app.stage;
   
     // eg1: TiledContainer
-    const canvasOption = {
-      width: this.app.screen.width,
-      height: this.app.screen.height,
-    };
-    const container = new TiledLayersContainer(indexTiledData.tiledJson, indexTiledData.resource, canvasOption);
+    const container = new TiledLayersContainer(
+      indexTiledData.tiledJson,
+      indexTiledData.resource,
+      {
+        width: this.app.screen.width,
+        height: this.app.screen.height,
+        layoutRef: 'center',
+      },
+    );
     this.root.addChild(container);
     console.log(container)
     // 获取一个 PIXI 元素
@@ -40,7 +44,15 @@ export default {
     frame.addChild(sprite);
 
     // eg2: TiledJsonData
-    const tiledData = new TiledData(indexTiledData.tiledJson, indexTiledData.resource, canvasOption);
+    const tiledData = new TiledData(
+      indexTiledData.tiledJson,
+      indexTiledData.resource,
+      {
+        width: this.app.screen.width,
+        height: this.app.screen.height,
+        layoutRef: 'center',
+      },
+    );
     console.log(tiledData);
     // 获取一个元素的基础信息
     const obj = tiledData.getObjectByName('bg');

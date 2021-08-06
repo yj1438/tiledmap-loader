@@ -39,7 +39,11 @@ const canvas = {
     this._render();
   },
   _render() {
-    const container = new TiledLayersContainer(indexTiledData.tiledJson, indexTiledData.resource, { width: width, height: height });
+    const container = new TiledLayersContainer(
+      indexTiledData.tiledJson,
+      indexTiledData.resource,
+      { width: width, height: height, layoutRef: 'center' }
+    );
     this.root.addChild(container);
     // 获取一个 tiny 元素
     const item = container.getChildByName('layer1');

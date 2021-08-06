@@ -1,4 +1,4 @@
-import { getTileGidMap, fixTiledInfo } from './common';
+import { getTileGidMap, fixTiledInfo, fixLayout } from './common';
 
 export default class TiledData {
   /**
@@ -28,14 +28,14 @@ export default class TiledData {
    * @returns
    */
   _getRenderInfo() {
-    const layers = (this.tiledJson.layers || []);
+    let layers = (this.tiledJson.layers || []);
     const globalOption = {
       width: this.tiledJson.width,
       height: this.tiledJson.height,
       canvasWidth: this.canvasOption.width,
       canvasHeight: this.canvasOption.height,
     };
-    const info = layers.map(layer => {
+    layers = layers.map(layer => {
       const layerInfo = fixTiledInfo(layer, false, globalOption);
       layerInfo.objects = (layer.objects || []).map(obj => {
         const objectInfo = fixTiledInfo(obj, true, globalOption);
@@ -50,7 +50,20 @@ export default class TiledData {
       });
       return layerInfo;
     });
-    return info;
+    //
+    const rootInfo = {
+      x: 0,
+      y: 0,
+      type: 'layer',
+      layoutRef: this.canvasOption.layoutRef || '',
+    };
+    const _layout = fixLayout(rootInfo, globalOption);
+    rootInfo.x = _layout.x;
+    rootInfo.y = _layout.y;
+    return {
+      rootInfo,
+      layers,
+    };
   }
 
   /**
@@ -59,7 +72,7 @@ export default class TiledData {
    */
   _getItemMapByName() {
     const objectMap = {};
-    this.renderInfo.forEach(layer => {
+    this.renderInfo.layers.forEach(layer => {
       const name = layer.name;
       if (name) {
         objectMap[name] = objectMap[name] || [];

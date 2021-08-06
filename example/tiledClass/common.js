@@ -71,12 +71,16 @@ export function fixTiledInfo(tiledItemInfo = {}, isObject, globalOpation) {
     anchor: { x: isObject ? 0.5 : 0, y: isObject ? 0.5 : 0 },
     rotation: 0,
   };
-  const layoutInfo = calcPosAndRotation(tiledItemInfo, isObject);
   info.properties = getProperties(tiledItemInfo);
+  // Tiled 产物坐标等修正
+  const layoutInfo = calcPosAndRotation(tiledItemInfo, isObject);
   info.x = layoutInfo.x;
   info.y = layoutInfo.y;
   info.rotation = layoutInfo.rotation;
-  fixLayout(info, globalOpation);
+  // 布局定位适配
+  const _layout = fixLayout(info, globalOpation);
+  info.x = _layout.x;
+  info.y = _layout.y;
   return info;
 }
 
@@ -150,8 +154,16 @@ function calcPosAndRotation(drawInfo, canRotate = false) {
  * 布局修正
  * 1. right / bottom 等定位
  */
-function fixLayout(layoutInfo, globalOpation) {
-  let layoutRef = layoutInfo.properties.layoutRef || ['left', 'top'];
+export function fixLayout(layoutInfo, globalOpation) {
+  const _layout = {
+    x: layoutInfo.x,
+    y: layoutInfo.y,
+  };
+  //
+  let layoutRef = layoutInfo.layoutRef
+    || (layoutInfo.properties
+      ? (layoutInfo.properties.layoutRef || ['left', 'top'])
+      : ['left', 'top']);
   if (layoutRef === 'center') {
     layoutRef = ['center', 'center'];
   }
@@ -168,23 +180,24 @@ function fixLayout(layoutInfo, globalOpation) {
       ? 'bottom'
       : layoutRef.indexOf('center') >= 0
         ? 'center' : 'top';
-  
-  // const position = layoutInfo.properties.position || 'absolute';
+  //
   if (layoutInfo.type === 'layer') {
     // 修正布局
     if (layoutRefX === 'left') {
-      layoutInfo.x = layoutInfo.x;
+      _layout.x = layoutInfo.x;
     } else if (layoutRefX === 'right') {
-      layoutInfo.x = globalOpation.canvasWidth - (globalOpation.width - layoutInfo.x);
+      _layout.x = globalOpation.canvasWidth - (globalOpation.width - layoutInfo.x);
     } else if (layoutRefX === 'center') {
-      layoutInfo.x = globalOpation.canvasWidth / 2 - (globalOpation.width / 2 - layoutInfo.x);
+      _layout.x = globalOpation.canvasWidth / 2 - (globalOpation.width / 2 - layoutInfo.x);
     }
     if (layoutRefY === 'top') {
-      layoutInfo.y = layoutInfo.y;
+      _layout.y = layoutInfo.y;
     } else if (layoutRefY === 'bottom') {
-      layoutInfo.y = globalOpation.canvasHeight - (globalOpation.height - layoutInfo.y);
+      _layout.y = globalOpation.canvasHeight - (globalOpation.height - layoutInfo.y);
     } else if (layoutRefY === 'center') {
-      layoutInfo.y = globalOpation.canvasHeight / 2 - (globalOpation.height / 2 - layoutInfo.y);
+      _layout.y = globalOpation.canvasHeight / 2 - (globalOpation.height / 2 - layoutInfo.y);
     }
   }
+  //
+  return _layout;
 }

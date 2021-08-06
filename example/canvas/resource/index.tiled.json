@@ -90,13 +90,6 @@
       "offsetx": 0,
       "offsety": 145,
       "opacity": 1,
-      "properties": [
-        {
-          "name": "layoutRef",
-          "type": "string",
-          "value": "center,top"
-        }
-      ],
       "type": "objectgroup",
       "visible": true,
       "x": 0,

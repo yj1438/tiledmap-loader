@@ -45,7 +45,7 @@ export default (Tiny.TiledLayersContainer = class TiledLayersContainer extends T
    * @private
    */
   renderContent() {
-    const layers = this.tiledData.renderInfo;
+    const { layers, rootInfo } = this.tiledData.renderInfo;
     (layers || []).forEach(layer => {
       const container = new Tiny.Container();
       layout(container, layer);
@@ -72,6 +72,8 @@ export default (Tiny.TiledLayersContainer = class TiledLayersContainer extends T
         }
       });
     });
+    //
+    this.setPosition(rootInfo.x, rootInfo.y);
   }
 
   /**

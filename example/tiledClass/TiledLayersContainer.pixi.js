@@ -44,7 +44,7 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
    * @private
    */
   renderContent() {
-    const layers = this.tiledData.renderInfo;
+    const { layers, rootInfo } = this.tiledData.renderInfo;
     (layers || []).forEach(layer => {
       const container = new PIXI.Container();
       layout(container, layer);
@@ -70,6 +70,8 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
         }
       });
     });
+    //
+    this.position.set(rootInfo.x, rootInfo.y);
   }
 
   /**
