@@ -131,7 +131,7 @@ export default {
 
 `new TiledData(TiledData.tiledJson, TiledData.resource)`
 
-* `renderInfo{Array}` 转换后的完整信息，和可视化编辑的的层级、元素一一对应的树形结构；
+* `renderInfo{Object}` 转换后的完整信息，和可视化编辑的的层级、元素一一对应的树形结构；
 * `itemMapByName{Object}` 有 name 命名元素的集合，方便通过 name 取元素
 * `tiledJon` Tiled 工具产物原始信息
 * `resouce` 资源使用映射 js module
@@ -226,6 +226,15 @@ height: 1624
 
 ### 3.2 **TiledLayersContainer**
 
+`new TiledLayersContainer(tiledJson, resource, canvasOption)`
+
+* **tiledJson**: `.tiled` 返回的 tiledJson
+* **resource**: `.tiled` 返回的 resource
+* **canvasOption**
+  - width: 页面 canvas 实际宽度
+  - height: 页面  canvas 实际高度
+  - layoutRef: 布局定位方式，`left/right、top/bottom、center`
+
 **method**
 
 * `getChildByName(name): <PIXI.Container|PIXI.Sprite>` 根据 name 获取 PIXI 元素，name 重复的话返回第一个
@@ -241,7 +250,7 @@ height: 1624
 
 * tiledData: TiledData 的实例
 
-## 4. 自定义参数
+## 4. Tiled 元素自定义参数
 
 ### 4.1 layoutRef
 
