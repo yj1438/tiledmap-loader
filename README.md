@@ -4,7 +4,7 @@
 
 For Canvas projects such as pixijs etx. , access to the visual editing capabilities of the Tiled map tool.
 
-webpack-loader，可以将 [Tiled](https://www.mapeditor.org/) 工具直接应用于 canvas 项目，如 pixijs 等，通过 Tiled 工具对项目内的视觉内容进行直接的可视化编辑。
+webpack-loader，可以将 [Tiled (https://www.mapeditor.org/)](https://www.mapeditor.org/) 工具直接应用于 canvas 项目，如 pixijs 等，通过 Tiled 工具对项目内的视觉内容进行直接的可视化编辑。
 
 ## 1. How to use
 
@@ -150,26 +150,39 @@ import indexTiledData from './resource/index.tiled';
 
 console.warn(indexTiledData);
 
+const width = 750;
+const height = 1624;
+
 export default {
   app: null,
   root: null,
   init() {
     const view = document.getElementById('J_canvas');
-    view.style.width = '375px';
-    view.style.height = '812px';
+    view.style.width = `${width / 2}px`;
+    view.style.height = `${height / 2}px`;
+
     this.app = new PIXI.Application({
       view,
-      width: 750,
-      height: 1624,
+      width: width,
+      height: height,
+      antialias: true,
+      backgroundColor: 0x98d8ff
     });
     this.root = this.app.stage;
-  
-    // eg: TiledContainer
-    const container = new TiledLayersContainer(indexTiledData.tiledJson, indexTiledData.resource);
+      
+    // eg1: TiledContainer
+    const container = new TiledLayersContainer(
+      indexTiledData.tiledJson,
+      indexTiledData.resource,
+      { width: width, height: height, layoutRef: 'center' },
+    );
     this.root.addChild(container);
-    // 获取一个 PIXI 元素
-    const item = container.getChildByName('layer1');
-    console.log(item)
+    /*
+     * 获取一个元素
+     */
+    // 图片 sprite
+    const item = container.getChildByName('obj1');
+    console.log('object', item);
   },
 };
 ```
@@ -242,21 +255,22 @@ height: 1624
 
 | | Tiled 元素对应转换为 PIXI 元素 |
 | --- | --- |
-| layer |	Container
+| layer |	Container |
 | object [图片元素]	| Sprite |
 | object [区域框]	| Container |
+| object [占位图]	| Container |
 
 **property**
 
 * tiledData: TiledData 的实例
 
-## 4. Tiled 元素自定义参数
+## 4. Tiled 自定义属性
 
 ### 4.1 layoutRef
 
 说明：相对布局
 
-适用元素：layer
+适用元素：root | layer
 
 值(X 方向,Y 方向)：
   - 默认：`left,top`;
@@ -264,6 +278,16 @@ height: 1624
   - Y 方向：`top`、`center`、`bottom`
 
 ![](https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*qUMSQLu7wHIAAAAAAAAAAAAAARQnAQ)
+
+### 4.2 placeholder
+
+![](https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*qHagQJ_yIgMAAAAAAAAAAAAAARQnAQ)
+
+说明：仅用于 Tiled 编辑器内占位，在实现项目中是一个空的 container
+
+适用元素：object
+
+值：<boolean> true/false
 
 ## 5. Example
 
@@ -292,3 +316,5 @@ height: 1624
   - 优化 `layoutRef` 布局
 * 0.1.2
   - 支持整体 container 的`layoutRef` 布局
+* 0.1.3
+  - 支持 placeholder 占位图
