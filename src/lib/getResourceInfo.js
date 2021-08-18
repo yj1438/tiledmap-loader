@@ -36,8 +36,9 @@ module.exports = function(loadContext, jsonData, options, config) {
   jsonData.layers.forEach(layer => {
     layer.objects.forEach(obj => {
       const gid = obj.gid;
+      const properties = commmon.getProperties(obj);
       const tile = tileGidMap[gid];
-      if (tile) {
+      if (tile && properties.placeholder !== true) {
         imageList.indexOf(tile.image) === -1 && imageList.push(tile.image);
       }
     });

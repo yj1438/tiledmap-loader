@@ -9,7 +9,7 @@
       "name": "layer1",
       "objects": [
         {
-          "gid": 4,
+          "gid": 5,
           "height": 1333,
           "id": 4,
           "name": "bg",
@@ -71,8 +71,8 @@
           "type": "",
           "visible": true,
           "width": 213.855807401716,
-          "x": 84.8484848484853,
-          "y": 230.969696969697
+          "x": 17.6773967873545,
+          "y": 42.4503760010222
         },
         {
           "height": 0,
@@ -85,6 +85,25 @@
           "width": 0,
           "x": 173.636363636363,
           "y": 549.151515151515
+        },
+        {
+          "gid": 4,
+          "height": 250,
+          "id": 16,
+          "name": "placeholder",
+          "properties": [
+            {
+              "name": "placeholder",
+              "type": "bool",
+              "value": true
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 250,
+          "x": 314.393939393939,
+          "y": 431.515151515151
         }
       ],
       "offsetx": 0,
@@ -108,7 +127,7 @@
     }
   ],
   "nextlayerid": 5,
-  "nextobjectid": 15,
+  "nextobjectid": 17,
   "orientation": "orthogonal",
   "renderorder": "left-up",
   "tiledversion": "1.7.1",
@@ -133,11 +152,17 @@
           "image": "images1/3.jpeg",
           "imagewidth": 250,
           "imageheight": 236
+        },
+        {
+          "id": 3,
+          "image": "images1/placeholder.jpeg",
+          "imagewidth": 250,
+          "imageheight": 250
         }
       ],
       "firstgid": 1,
       "name": "images1",
-      "tilecount": 3,
+      "tilecount": 4,
       "tilewidth": 250,
       "tileheight": 313
     },
@@ -150,7 +175,7 @@
           "imageheight": 1333
         }
       ],
-      "firstgid": 4,
+      "firstgid": 5,
       "name": "images2",
       "tilecount": 1,
       "tilewidth": 750,

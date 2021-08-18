@@ -23,7 +23,7 @@ function layout(obj, info = {}) {
   obj.visible = visible;
   obj.alpha = opacity;
   obj.position.set(x, y);
-  if (obj.constructor === PIXI.Sprite && type === 'object') {
+  if (obj.constructor === PIXI.Sprite) {
     obj.width = width;
     obj.height = height;
     obj.anchor.set(anchor.x, anchor.y);
@@ -54,6 +54,7 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
       const objects = layer.objects || [];
       objects.forEach(obj => {
         if (obj.imageUrl) {
+          // 有图片 Sprite
           let texture = PIXI.utils.TextureCache[obj.imageUrl];
           if (!texture) {
             texture = PIXI.Texture.fromImage(obj.imageUrl);
@@ -63,6 +64,7 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
           container.addChild(sprite);
           this._setChildrenMap(sprite);
         } else {
+          // 无图片 Container
           const _container = new PIXI.Container();
           layout(_container, obj);
           container.addChild(_container);

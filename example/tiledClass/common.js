@@ -54,13 +54,14 @@ function getProperties(tiledItemInfo = {}) {
 /**
  * 重新组装渲染数据
  * @tiledItemInfo {Object} Tiled 原始产物 
- * @isObject {boolean} 是否是 object 元素
+ * @type {('layer'|'sprite'|'container')} 元素类型 layer|sprite|container
  * @globalOpation {Object} 全局配置
  */
-export function fixTiledInfo(tiledItemInfo = {}, isObject, globalOpation) {
+export function fixTiledInfo(tiledItemInfo = {}, type = '', globalOpation) {
+  const isSprite = type === 'sprite';
   const info = {
     name: tiledItemInfo.name || '',
-    type: isObject ? 'object' : 'layer',
+    type: type,
     opacity: typeof tiledItemInfo.opacity === 'number' ? tiledItemInfo.opacity : 1,
     visible: tiledItemInfo.visible,
     height: tiledItemInfo.height,
@@ -68,12 +69,12 @@ export function fixTiledInfo(tiledItemInfo = {}, isObject, globalOpation) {
     scale: 1,
     x: 0,
     y: 0,
-    anchor: { x: isObject ? 0.5 : 0, y: isObject ? 0.5 : 0 },
+    anchor: { x: isSprite ? 0.5 : 0, y: isSprite ? 0.5 : 0 },
     rotation: 0,
   };
   info.properties = getProperties(tiledItemInfo);
   // Tiled 产物坐标等修正
-  const layoutInfo = calcPosAndRotation(tiledItemInfo, isObject);
+  const layoutInfo = calcPosAndRotation(tiledItemInfo, isSprite);
   info.x = layoutInfo.x;
   info.y = layoutInfo.y;
   info.rotation = layoutInfo.rotation;

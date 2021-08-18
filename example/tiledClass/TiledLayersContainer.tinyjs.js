@@ -23,7 +23,7 @@ function layout(obj, info = {}) {
   obj.setVisible(visible);
   obj.setOpacity(opacity);
   obj.setPosition(x, y);
-  if (obj.constructor === Tiny.Sprite && type === 'object') {
+  if (obj.constructor === Tiny.Sprite) {
     obj.width = width;
     obj.height = height;
     obj.setAnchor(anchor.x, anchor.y);
@@ -55,7 +55,7 @@ export default (Tiny.TiledLayersContainer = class TiledLayersContainer extends T
       const objects = layer.objects || [];
       objects.forEach(obj => {
         if (obj.imageUrl) {
-          // 先尝试从缓存中取
+          // 有图片 Sprite
           let texture = Tiny.TextureCache[obj.imageUrl];
           if (!texture) {
             texture = Tiny.Texture.fromImage(obj.imageUrl);
@@ -65,6 +65,7 @@ export default (Tiny.TiledLayersContainer = class TiledLayersContainer extends T
           container.addChild(sprite);
           this._setChildrenMap(sprite);
         } else {
+          // 无图片 Container
           const _container = new Tiny.Container();
           layout(_container, obj);
           container.addChild(_container);

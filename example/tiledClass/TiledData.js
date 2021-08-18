@@ -36,15 +36,18 @@ export default class TiledData {
       canvasHeight: this.canvasOption.height,
     };
     layers = layers.map(layer => {
-      const layerInfo = fixTiledInfo(layer, false, globalOption);
+      const layerInfo = fixTiledInfo(layer, 'layer', globalOption);
       layerInfo.objects = (layer.objects || []).map(obj => {
-        const objectInfo = fixTiledInfo(obj, true, globalOption);
+        // 取图片
         const gid = obj.gid;
-        if (gid) {
-          const tileInfo = this.tiledGidMap[gid];
+        const tileInfo = gid ? this.tiledGidMap[gid] : null;
+        const imageUrl = tileInfo ? this.resource[tileInfo.image] : '';
+        //
+        const objectInfo = fixTiledInfo(obj, imageUrl ? 'sprite' : 'container', globalOption);
+        if (imageUrl) {
           objectInfo.gid = gid;
+          objectInfo.imageUrl = imageUrl;
           objectInfo.imageName = tileInfo.image;
-          objectInfo.imageUrl = this.resource[tileInfo.image];
         }
         return objectInfo;
       });
