@@ -53,7 +53,7 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        if (obj.imageUrl) {
+        if (obj.imageUrl && !obj.properties.placeholder) {
           // 有图片 Sprite
           let texture = PIXI.utils.TextureCache[obj.imageUrl];
           if (!texture) {

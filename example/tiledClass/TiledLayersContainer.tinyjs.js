@@ -54,7 +54,7 @@ export default (Tiny.TiledLayersContainer = class TiledLayersContainer extends T
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        if (obj.imageUrl) {
+        if (obj.imageUrl && !obj.properties.placeholder) {
           // 有图片 Sprite
           let texture = Tiny.TextureCache[obj.imageUrl];
           if (!texture) {

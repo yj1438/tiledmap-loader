@@ -104,6 +104,25 @@
           "width": 250,
           "x": 314.393939393939,
           "y": 431.515151515151
+        },
+        {
+          "gid": 3,
+          "height": 236,
+          "id": 18,
+          "name": "img1",
+          "properties": [
+            {
+              "name": "placeholder",
+              "type": "bool",
+              "value": false
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 250,
+          "x": 47.7272727272727,
+          "y": 748.757575757576
         }
       ],
       "offsetx": 0,
@@ -127,7 +146,7 @@
     }
   ],
   "nextlayerid": 5,
-  "nextobjectid": 17,
+  "nextobjectid": 20,
   "orientation": "orthogonal",
   "renderorder": "left-up",
   "tiledversion": "1.7.1",
