@@ -241,6 +241,8 @@ height: 1624
 
 `new TiledLayersContainer(tiledJson, resource, canvasOption)`
 
+**extends**: PIXI.Container
+
 * **tiledJson**: `.tiled` 返回的 tiledJson
 * **resource**: `.tiled` 返回的 resource
 * **canvasOption**
@@ -263,6 +265,13 @@ height: 1624
 **property**
 
 * tiledData: TiledData 的实例
+
+### 3.3 **PIXI.TiledSprite**
+
+**extends**: PIXI.Sprite
+
+**method**
+* `fixAnchor(x: number, y: number)` 在保持原有位置的情况下，调整 anchor
 
 ## 4. Tiled 自定义属性
 
@@ -318,3 +327,9 @@ height: 1624
   - 支持整体 container 的`layoutRef` 布局
 * 0.1.3
   - 支持 placeholder 占位图
+* 0.1.4
+  - 优化
+* 0.1.5
+  - bugfix: 解决占位图不能用和内容贴图使用同一张图片的问题
+* 0.1.6
+  - sprite 增加 `fixAnchor` 方法：支持调整 anchor 后不导致位置错乱
