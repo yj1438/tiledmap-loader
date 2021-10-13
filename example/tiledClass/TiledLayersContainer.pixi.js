@@ -1,4 +1,5 @@
 import TiledData from './TiledData';
+import TiledSprite from './TiledSprite.pixi';
 
 /**
  * 布局等基础属性设置
@@ -23,7 +24,7 @@ function layout(obj, info = {}) {
   obj.visible = visible;
   obj.alpha = opacity;
   obj.position.set(x, y);
-  if (obj.constructor === PIXI.Sprite) {
+  if (obj.texture) {
     obj.width = width;
     obj.height = height;
     obj.anchor.set(anchor.x, anchor.y);
@@ -59,7 +60,7 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
           if (!texture) {
             texture = PIXI.Texture.fromImage(obj.imageUrl);
           }
-          const sprite = new PIXI.Sprite(texture);
+          const sprite = new TiledSprite(texture);
           layout(sprite, obj);
           container.addChild(sprite);
           this._setChildrenMap(sprite);

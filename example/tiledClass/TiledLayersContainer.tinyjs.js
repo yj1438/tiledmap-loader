@@ -1,4 +1,5 @@
 import TiledData from './TiledData';
+import TiledSprite from './TiledSprite.tinyjs';
 
 /**
  * 
@@ -23,7 +24,7 @@ function layout(obj, info = {}) {
   obj.setVisible(visible);
   obj.setOpacity(opacity);
   obj.setPosition(x, y);
-  if (obj.constructor === Tiny.Sprite) {
+  if (obj.texture) {
     obj.width = width;
     obj.height = height;
     obj.setAnchor(anchor.x, anchor.y);
@@ -60,7 +61,7 @@ export default (Tiny.TiledLayersContainer = class TiledLayersContainer extends T
           if (!texture) {
             texture = Tiny.Texture.fromImage(obj.imageUrl);
           }
-          const sprite = new Tiny.Sprite(texture);
+          const sprite = new TiledSprite(texture);
           layout(sprite, obj);
           container.addChild(sprite);
           this._setChildrenMap(sprite);
