@@ -271,7 +271,7 @@ height: 1624
 **extends**: PIXI.Sprite
 
 **method**
-* `fixAnchor(x: number, y: number)` 在保持原有位置的情况下，调整 anchor
+* `fixAnchor(x: number, y: number)` 在保持原有位置不变的情况下，调整 anchor
 
 ## 4. Tiled 自定义属性
 
