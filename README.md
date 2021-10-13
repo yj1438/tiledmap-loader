@@ -252,8 +252,8 @@ height: 1624
 
 **method**
 
-* `getChildByName(name): <PIXI.Container|PIXI.Sprite>` 根据 name 获取 PIXI 元素，name 重复的话返回第一个
-* `getChildrenByName(name): Array<PIXI.Container|PIXI.Sprite>` 根据 name 获取 PIXI 元素列表
+* `getChildByName(name): <PIXI.Container|PIXI.TiledSprite>` 根据 name 获取 PIXI 元素，name 重复的话返回第一个
+* `getChildrenByName(name): Array<PIXI.Container|PIXI.TiledSprite>` 根据 name 获取 PIXI 元素列表
 
 | | Tiled 元素对应转换为 PIXI 元素 |
 | --- | --- |
@@ -266,7 +266,7 @@ height: 1624
 
 * tiledData: TiledData 的实例
 
-### 3.3 **PIXI.TiledSprite**
+### 3.3 **TiledSprite**
 
 **extends**: PIXI.Sprite
 
