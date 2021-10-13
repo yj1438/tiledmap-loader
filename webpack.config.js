@@ -43,10 +43,13 @@ const jsLoader = [
 
 const config = {
   entry: {
+    'common': './example/tiledClass/common.js',
     'TiledData': './example/tiledClass/TiledData.js',
     'TiledJsonData': './example/tiledClass/TiledJsonData.js',
     'TiledLayersContainer.pixi': './example/tiledClass/TiledLayersContainer.pixi.js',
     'TiledLayersContainer.tinyjs': './example/tiledClass/TiledLayersContainer.tinyjs.js',
+    'TiledSprite.pixi': './example/tiledClass/TiledSprite.pixi.js',
+    'TiledSprite.tinyjs': './example/tiledClass/TiledSprite.tinyjs.js',
   },
   output: {
     path: path.resolve('./util/'),
