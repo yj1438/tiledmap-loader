@@ -333,3 +333,5 @@ height: 1624
   - bugfix: 解决占位图不能用和内容贴图使用同一张图片的问题
 * 0.1.6
   - sprite 增加 `fixAnchor` 方法：支持调整 anchor 后不导致位置错乱
+* 0.1.8
+  - 完善 properties => layoutRef 类型兼容

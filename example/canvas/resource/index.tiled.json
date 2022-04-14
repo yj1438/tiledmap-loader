@@ -1,6 +1,6 @@
 {
   "compressionlevel": -1,
-  "height": 1624,
+  "height": 1334,
   "infinite": false,
   "layers": [
     {
@@ -13,18 +13,6 @@
           "height": 1333,
           "id": 4,
           "name": "bg",
-          "properties": [
-            {
-              "name": "layoutRef",
-              "type": "string",
-              "value": "left,top"
-            },
-            {
-              "name": "position",
-              "type": "string",
-              "value": "absolute"
-            }
-          ],
           "rotation": 0,
           "type": "",
           "visible": true,
@@ -121,24 +109,23 @@
           "type": "",
           "visible": true,
           "width": 250,
-          "x": 47.7272727272727,
-          "y": 748.757575757576
+          "x": 68.9393939393939,
+          "y": 791.181818181818
         }
       ],
-      "offsetx": 0,
-      "offsety": 145,
       "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "draworder": "topdown",
-      "id": 4,
-      "name": "layer2",
-      "objects": [],
-      "opacity": 1,
+      "properties": [
+        {
+          "name": "index",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "name": "layoutRef",
+          "type": "string",
+          "value": ""
+        }
+      ],
       "type": "objectgroup",
       "visible": true,
       "x": 0,
@@ -146,7 +133,7 @@
     }
   ],
   "nextlayerid": 5,
-  "nextobjectid": 20,
+  "nextobjectid": 24,
   "orientation": "orthogonal",
   "renderorder": "left-up",
   "tiledversion": "1.7.1",

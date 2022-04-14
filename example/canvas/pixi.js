@@ -4,8 +4,9 @@ import indexTiledData from './resource/index.tiled';
 
 console.warn(indexTiledData);
 
-const width = 750;
-const height = 1624;
+const { clientHeight, clientWidth } = document.body;
+const width = clientWidth * 2;
+const height = clientHeight * 2;
 
 export default {
   app: null,
@@ -53,14 +54,14 @@ export default {
     frame.addChild(sprite2);
 
     // eg2: TiledJsonData
-    const tiledData = new TiledData(
-      indexTiledData.tiledJson,
-      indexTiledData.resource,
-      { width: width, height: height, layoutRef: 'center' },
-    );
-    console.log(tiledData);
-    // 获取一个元素的基础信息
-    const obj = tiledData.getObjectByName('bg');
-    console.log(obj); // { x, y, height, width, rotation, properties, visible }
+    // const tiledData = new TiledData(
+    //   indexTiledData.tiledJson,
+    //   indexTiledData.resource,
+    //   { width: width, height: height, layoutRef: 'center' },
+    // );
+    // console.log(tiledData);
+    // // 获取一个元素的基础信息
+    // const obj = tiledData.getObjectByName('bg');
+    // console.log(obj); // { x, y, height, width, rotation, properties, visible }
   }
 };

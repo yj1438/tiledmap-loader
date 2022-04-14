@@ -18,6 +18,24 @@ export function getTileGidMap(tiledJsonData) {
 }
 
 /**
+ * 属性转换
+ * 对逗号分隔符的，转换成数组
+ * 1. 'aaa' => 'aaa'
+ * 2. 'aaa,bbb' => ['aaa', 'bbb'] 
+ * @returns 
+ */
+function parseValue(value) {
+  let _value = value;
+  if (typeof _value === 'string') {
+    let valueArr = _value.split(',');
+    if (valueArr.length > 1) {
+      _value = valueArr;
+    }
+  }
+  return _value;
+}
+
+/**
  * 获取 properties object
  * @param {Object} drawInfo tiled 生成的 layer/object 配置信息，
  * [
@@ -32,13 +50,7 @@ function getProperties(tiledItemInfo = {}) {
   const { properties = [] } = tiledItemInfo;
   const obj = {};
   properties.forEach(p => {
-    let value = p.value;
-    if (typeof value === 'string') {
-      let valueArr = value.split(',');
-      if (valueArr.length > 1) {
-        value = valueArr.map(v => v.trim());
-      }
-    }
+    const value = parseValue(p.value);
     if (!obj[p.name]) {
       obj[p.name] = value;
     } else {
@@ -161,7 +173,7 @@ export function fixLayout(layoutInfo, globalOpation) {
     y: layoutInfo.y,
   };
   //
-  let layoutRef = layoutInfo.layoutRef
+  let layoutRef = parseValue(layoutInfo.layoutRef)
     || (layoutInfo.properties
       ? (layoutInfo.properties.layoutRef || ['left', 'top'])
       : ['left', 'top']);
