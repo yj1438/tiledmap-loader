@@ -1,10 +1,10 @@
-import pixi from './canvas/pixi';
-// import tinyjs from './canvas/tinyjs';
+// import pixi from './canvas/pixi';
+import tinyjs from './canvas/tinyjs';
 
 import 'common/css/reset.less';
 
 // pixi5
-pixi.init();
+// pixi.init();
 
 // tinyjs
-// tinyjs.init();
+tinyjs.init();

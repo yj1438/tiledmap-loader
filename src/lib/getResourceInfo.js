@@ -38,7 +38,11 @@ module.exports = function(loadContext, jsonData, options, config) {
       const gid = obj.gid;
       const properties = commmon.getProperties(obj);
       const tile = tileGidMap[gid];
-      if (tile && properties.placeholder !== true) {
+      if (
+        tile
+        && properties.placeholder !== true
+        && properties.placeholderSprite !== true
+      ) {
         imageList.indexOf(tile.image) === -1 && imageList.push(tile.image);
       }
     });

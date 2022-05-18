@@ -9,8 +9,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 95.45454545454538,
-                "y": 362.121212121212
+                "x": 169.6969696969697,
+                "y": 966.6666666666666
             }
         },
         "index.tiled.json#images": {
@@ -33,7 +33,7 @@
         "index.tiled.json"
     ],
     "project": "index.tiled-project",
-    "property.type": "int",
+    "property.type": "bool",
     "recentFiles": [
         "index.tiled.json"
     ]

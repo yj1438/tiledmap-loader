@@ -55,7 +55,13 @@ export default (Tiny.TiledLayersContainer = class TiledLayersContainer extends T
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        if (obj.imageUrl && !obj.properties.placeholder) {
+        if (obj.properties.placeholderSprite) {
+          const texture = Tiny.Texture.EMPTY;
+          const sprite = new TiledSprite(texture);
+          layout(sprite, obj);
+          container.addChild(sprite);
+          this._setChildrenMap(sprite);
+        } else if (obj.imageUrl && !obj.properties.placeholder) {
           // 有图片 Sprite
           let texture = Tiny.TextureCache[obj.imageUrl];
           if (!texture) {

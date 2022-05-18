@@ -298,6 +298,16 @@ height: 1624
 
 值：<boolean> true/false
 
+### 4.3 placeholderSprite
+
+![](https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*FEFlRprg4CIAAAAAAAAAAAAAARQnAQ)
+
+说明：仅用于 Tiled 编辑器内占位，在实现项目中是一个纹理为 EMPTY 的 Sprite，项目中进行纹理替换。
+
+适用元素：object
+
+值：<boolean> true/false
+
 ## 5. Example
 
 `example`
@@ -326,7 +336,7 @@ height: 1624
 * 0.1.2
   - 支持整体 container 的`layoutRef` 布局
 * 0.1.3
-  - 支持 placeholder 占位图
+  - 支持 placeholder 占位图 (Container)
 * 0.1.4
   - 优化
 * 0.1.5
@@ -335,3 +345,5 @@ height: 1624
   - sprite 增加 `fixAnchor` 方法：支持调整 anchor 后不导致位置错乱
 * 0.1.8
   - 完善 properties => layoutRef 类型兼容
+* 0.1.9
+  - 支持 placeholderSprite 占位图 (Sprite)

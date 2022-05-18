@@ -41,6 +41,10 @@ export default {
      */
     // 图片 sprite
     const item = container.getChildByName('obj1');
+    // 占位图
+    const placeholderSprite = container.getChildByName('placeholderSprite');
+    const newTexture = Tiny.Texture.from('https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*sw6_QZgKyW8AAAAAAAAAAAAAARQnAQ');
+    placeholderSprite.texture = newTexture;
     // 占位框
     const placeholder = container.getChildByName('placeholder');
     const sprite1 = Tiny.Sprite.from('https://gw.alipayobjects.com/mdn/rms_93c05c/afts/img/A*sw6_QZgKyW8AAAAAAAAAAAAAARQnAQ');

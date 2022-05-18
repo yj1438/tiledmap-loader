@@ -54,7 +54,13 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
       //
       const objects = layer.objects || [];
       objects.forEach(obj => {
-        if (obj.imageUrl && !obj.properties.placeholder) {
+        if (obj.properties.placeholderSprite) {
+          const texture = PIXI.Texture.EMPTY;
+          const sprite = new TiledSprite(texture);
+          layout(sprite, obj);
+          container.addChild(sprite);
+          this._setChildrenMap(sprite);
+        } else if (obj.imageUrl && !obj.properties.placeholder) {
           // 有图片 Sprite
           let texture = PIXI.utils.TextureCache[obj.imageUrl];
           if (!texture) {
@@ -95,13 +101,13 @@ export default (PIXI.TiledLayersContainer = class TiledLayersContainer extends P
 
   /**
    * @private
-   * @param {Object} tinyObj 
+   * @param {Object} pixiObj displayObj 
    */
-  _setChildrenMap(tinyObj) {
-    const name = tinyObj.name;
+  _setChildrenMap(pixiObj) {
+    const name = pixiObj.name;
     if (name) {
       const children = this.childrenMap[name] || [];
-      children.push(tinyObj);
+      children.push(pixiObj);
       this.childrenMap[name] = children;
     }
   }
