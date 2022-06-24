@@ -6,7 +6,7 @@ const template = require('./template');
 let gid = 1;
 
 function getTileset(basePath, dirname) {
-  const files = glob.sync(path.join(basePath, dirname, '*.+(png|jpg|jpeg|web|bmp)'));
+  const files = glob.sync(path.join(basePath, dirname, '*.+(png|jpg|jpeg|webp|bmp)'));
   if (!files.length) {
     const _gid = gid;
     gid = gid + 0;
